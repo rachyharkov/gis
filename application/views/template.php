@@ -77,7 +77,24 @@
                   <li><a href="<?php echo base_url() ?>Skala"><i class="fa fa-list"></i> Skala Preferensi</a></li>
                   <li><a href="<?php echo base_url() ?>Kriteria"><i class="fa fa-list"></i> Kriteria</a></li>
                   <li><a href="<?php echo base_url() ?>Alternatif"><i class="fa fa-list"></i> Alternatif</a></li>
-                </ul>
+									<li><a href="<?php echo base_url() ?>Perbandingan_kriteria"><i class="fa fa-circle-o"></i> Perbandingan Kriteria</a></li>
+									<li class=""><a><i class="fa fa-circle-o"></i> Perbandingan Alternatif <span class="fa fa-chevron-down"></span></a>
+										<ul class="nav child_menu" style="display: none;">
+
+										<?php
+											$query = "SELECT * FROM kriteria ORDER BY kriteria_id";
+											$data = $this->db->query($query)
+										?>
+										<?php
+											foreach ($data->result() as $row) { ?>
+												<li><a href="<?= base_url('perbandingan_alternatif/alt/' .$row->kriteria_id) ?>"><?= $row->nama_kriteria; ?></a></li>
+											<?php }
+										?>
+										</ul>
+									</li>
+									<li><a href="<?php echo base_url() ?>hasil"><i class="fa fa-circle-o"></i>Hasil</a></li>
+                
+								</ul>
               </div>
               <?php if ($this->fungsi->user_login()->level=='ADMIN') { ?>
                 <div class="menu_section">
@@ -174,6 +191,9 @@
     <script src="<?php echo base_url() ?>assets/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="<?php echo base_url() ?>assets/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
     <script src="<?php echo base_url() ?>assets/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" integrity="sha256-c9vxcXyAG4paArQG3xk6DjyW/9aHxai2ef9RpMWO44A=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="<?php echo base_url() ?>assets/build/js/custom.min.js"></script>
