@@ -1,5 +1,14 @@
 <?php
 
+$query = "SELECT * FROM ranking";
+$data = $this->db->query($query);
+$jml_ranking = $data->num_rows();
+
+?>
+
+<?php if ($jml_ranking > 0) { ?>
+	<?php
+
 // menghitung perangkingan
 $query = "SELECT * FROM kriteria";
 $data = $this->db->query($query);
@@ -39,63 +48,26 @@ for ($i=0; $i <= ($jmlAlternatif-1); $i++) {
 }
 
 ?>
-
-
 <section class="content" id="content2" style="padding: 20px;">
-	<h2 class="ui header">Hasil Perhitungan</h2>
-	<table class="table table-bordered">
-		<thead>
-		<tr>
-			<th>Overall Composite Height</th>
-			<th>Priority Vector (rata-rata)</th>
-			<?php
-			for ($i=0; $i <= ($jmlAlternatif-1); $i++) { 
-				echo "<th>".getAlternatifNama($i)."</th>\n";
-			}
-			?>
-		</tr>
-		</thead>
-		<tbody>
 
-		<?php
-			for ($x=0; $x <= ($jmlKriteria-1) ; $x++) { 
-				echo "<tr>";
-				echo "<td>".getKriteriaNama($x)."</td>";
-				echo "<td>".round(getKriteriaPV(getKriteriaID($x)),5)."</td>";
-
-				for ($y=0; $y <= ($jmlAlternatif-1); $y++) { 
-					echo "<td>".round(getAlternatifPV(getAlternatifID($y),getKriteriaID($x)),5)."</td>";
-				}
-
-
-				echo "</tr>";
-			}
-		?>
-		</tbody>
-
-		<tfoot>
-		<tr>
-			<th colspan="2">Total</th>
-			<?php
-			for ($i=0; $i <= ($jmlAlternatif-1); $i++) { 
-				echo "<th>".round($nilai[$i],5)."</th>";
-			}
-			?>
-		</tr>
-		</tfoot>
-
-	</table>
 
 	<div class="row">
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_content">
 				  <div class="col-md-6 col-sm-6 col-xs-12">
-						<table class="table table-bordered">
+				  <center>
+				  <div class="alert alert-success alert-dismissible " role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+					</button>
+					<h5>DAFTAR MASYARAKAT PENERIMA BANTUAN LANGSUNG DI KABUPATEN TIMOR TENGAH UTARA</h5>
+					</div>
+				</center>
+						<table class="table table-bordered" style="margin-top: 50px;">
 							<thead>
 								<tr>
-									<th>Peringkat</th>
-									<th>Alternatif</th>
+									<th style="width: 10%;">Peringkat</th>
+									<th>Nama</th>
 									<th>Nilai</th>
 								</tr>
 							</thead>
@@ -117,8 +89,6 @@ for ($i=0; $i <= ($jmlAlternatif-1); $i++) {
 										<td><?php echo $row->nilai ?></td>
 									</tr>
 									<?php } ?>
-									
-									
 							</tbody>
 						</table>
                     </div>
@@ -181,3 +151,17 @@ $('#downloadPDF').click(function () {
 });
 
 </script>
+	
+<?php }else{ ?>
+	<center>
+		<h3 style="margin-top: 150px;">BELUM ADA PROCESS PERHITUNGAN 
+		MENENTUKAN MASYARAKAT PENERIMA BANTUAN LANGSUNG 
+		TUNAI</h3>
+	</center>
+<?php } ?>
+
+
+
+
+
+

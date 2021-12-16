@@ -12,8 +12,10 @@
             <div class='row'>
             <div class='col-md-9'>
             <div style="padding-bottom: 10px;">
-        <?php echo anchor(site_url('alternatif/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?></div>
-            </div>
+        <?php echo anchor(site_url('alternatif/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
+		<a class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modal_add_new"><i class="fa fa-upload" aria-hidden="true"></i> Import</a></div>
+		<a class="btn btn-sm btn-success" href="files/Format Import Alternatif.xlsx"><i class="fa fa-file-pdf-o faa-pulse animated"></i> &nbsp;Download Format Import</a>
+	</div>
             <div class='col-md-3'>
             <form action="<?php echo site_url('alternatif/index'); ?>" class="form-inline" method="get">
                     <div class="input-group">
@@ -85,3 +87,25 @@
             </div>
             </div>
 </div>
+
+<!-- ============ MODAL ADD =============== -->
+<div class="modal fade" id="modal_add_new" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h3 class="modal-title" id="myModalLabel">Import Data Alternatif</h3>
+            </div>
+            <form method="post" enctype="multipart/form-data" action="<?php base_url() ?>import/import">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputFile">File Upload</label>
+                    <input type="file" name="berkas_excel" class="form-control" id="exampleInputFile" required="">
+                </div>
+                <input type="submit" class="btn btn-primary" value="Import" name="import" />
+            </div>
+            </form>
+            </div>
+            </div>
+        </div>
+        <!--END MODAL ADD-->

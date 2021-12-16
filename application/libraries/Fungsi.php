@@ -13,4 +13,11 @@ Class Fungsi{
         return $user_data;
     }
 
+	public function web_login(){
+        $this->ci->load->model('Web_model');
+        $alternatif_id = $this->ci->session->userdata('alternatif_id');
+        $user_data = $this->ci->Web_model->get($alternatif_id)->row();
+        return $user_data;
+    }
+
 }

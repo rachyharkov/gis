@@ -8,6 +8,24 @@ function check_already_login(){
     }
 }
 
+function check_already_login_web(){
+
+    $ci =& get_instance();
+    $user_session = $ci->session->userdata('alternatif_id');
+    if ($user_session){
+        redirect('web/home');
+    }
+}
+
+function is_login_web(){
+    $ci =& get_instance();
+    $user_session = $ci->session->userdata('alternatif_id');
+    if (!$user_session){
+        redirect('web');        
+    }
+}
+
+
 //untuk semua ctrl cek seesion login dan session unit
 function is_login(){
     $ci =& get_instance();

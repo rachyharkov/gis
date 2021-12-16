@@ -171,11 +171,14 @@ $consRatio   = getConsRatio($jmlmpb, $jmlmnk, $n);
 
 		<?php
 	} else {
-		$query = $this->db->query('SELECT * FROM kriteria');
-		$jml_alt = $query->num_rows();
+		$query = "SELECT * FROM kriteria order by kriteria_id DESC limit 1";
+		$jml_alt = $this->db->query($query)->row();
+		$last_data= $jml_alt->kriteria_id;
 
 
-		if ($_POST['jenis'] == $jml_alt) {
+
+
+		if ($_POST['jenis'] == $last_data) {
 		?>
 
 			<form action="<?= base_url('hasil') ?>">
