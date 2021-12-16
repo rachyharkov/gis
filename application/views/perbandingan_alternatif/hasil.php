@@ -1,7 +1,8 @@
 <?php
 $query = $this->db->query('SELECT * FROM alternatif');
 
-$jenis = $_POST['jenis'] - 1;
+$jenis = $_POST['jenis'];
+
 $n = $query->num_rows();
 $matrik = array();
 $urut 	= 0;
@@ -51,7 +52,7 @@ for ($x = 0; $x <= ($n - 1); $x++) {
 	// nilai priority vektor
 	$pv[$x]	 = $jmlmnk[$x] / $n;
 	// memasukkan nilai priority vektor ke dalam tabel pv_kriteria dan pv_alternatif
-	$kriteria_id	= getKriteriaID($jenis);
+	$kriteria_id	= getKriteriaIDById($jenis);
 	$alternatif_id	= getAlternatifID($x);
 	inputAlternatifPV($alternatif_id, $kriteria_id, $pv[$x]);
 }
@@ -170,8 +171,9 @@ $consRatio   = getConsRatio($jmlmpb, $jmlmnk, $n);
 
 		<?php
 	} else {
-		$query = $this->db->query('SELECT * FROM alternatif');
+		$query = $this->db->query('SELECT * FROM kriteria');
 		$jml_alt = $query->num_rows();
+
 
 		if ($_POST['jenis'] == $jml_alt) {
 		?>

@@ -1,6 +1,6 @@
 <div class="">
 	<div class="title_left">
-		<h3>PERBANDINGAN ALTERNATIF &rarr; <?php echo getKriteriaNama($this->uri->segment(3) - 1) ?></h3>
+		<h3>PERBANDINGAN ALTERNATIF &rarr; <?php echo getKriteriaById($this->uri->segment(3)) ?></h3>
 	</div>
 	<div class="clearfix"></div>
 	<div class="row">
@@ -60,7 +60,7 @@
 													<td>
 														<div class="field">
 															<?php
-															$nilai = getNilaiPerbandinganAlternatif($x, $y, $this->uri->segment(3) - 1);
+															$nilai = getNilaiPerbandinganAlternatif($x, $y, $this->uri->segment(3));
 															?>
 															<input type="number" max="12" min="1" class="form-control" name="bobot<?php echo $urut ?>" value="<?php echo $nilai ?>" required>
 														</div>
@@ -72,7 +72,7 @@
 										?>
 									</tbody>
 								</table>
-								<input type="text" name="jenis" value="<?= $this->uri->segment(3) ?>" hidden>
+								<input type="text" name="jenis" value="<?= $this->uri->segment(3)?>" hidden>
 								<br><br>
 								<input class="btn btn-danger" type="submit" name="submit" value="SUBMIT">
 							</form>

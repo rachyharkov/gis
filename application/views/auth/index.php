@@ -48,7 +48,7 @@
               <div class="separator">
 
                 <div>
-                  <p>©<?= date('Y') ?> - Aplikasi SPK AHP</p>
+                  <p>©<?= date('Y') ?> - APLIKASI PENERIMA BANTUAN LANGSUNG TUNAI KABUPATEN TIMOR TENGAH UTARA</p>
                 </div>
               </div>
             </form>

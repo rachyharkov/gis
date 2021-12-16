@@ -52,6 +52,16 @@ function getNilaiPerbandinganKriteria($kriteria1,$kriteria2)
 
 }
 
+
+
+function getKriteriaIDById($no_urut) {
+	$ci = &get_instance();
+	$query  = "SELECT kriteria_id FROM kriteria where kriteria_id=$no_urut";
+	$result = $ci->db->query($query)->row();
+	return $result->kriteria_id;
+	
+}
+
 function getKriteriaID($no_urut) {
 	$ci = &get_instance();
 	$query  = "SELECT kriteria_id FROM kriteria ORDER BY kriteria_id";
@@ -124,6 +134,16 @@ function getNilaiIR($jmlKriteria) {
 	}
 	return $nilaiIR;
 }
+
+// mencari nama kriteria
+function getKriteriaById($no_urut) {
+	$ci = &get_instance();
+	$query  = "SELECT nama_kriteria FROM kriteria where kriteria_id=$no_urut";
+	$result = $ci->db->query($query)->row();
+	return $result->nama_kriteria;
+	
+}
+
 // mencari nama kriteria
 function getKriteriaNama($no_urut) {
 	$ci = &get_instance();
@@ -165,9 +185,11 @@ function inputDataPerbandinganKriteria($kriteria1,$kriteria2,$nilai) {
 // mencari nilai bobot perbandingan alternatif
 function getNilaiPerbandinganAlternatif($alternatif1,$alternatif2,$pembanding) {
 	$ci = &get_instance();
-	$alternatif_id1 = getKriteriaID($alternatif1);
-	$alternatif_id2 = getKriteriaID($alternatif2);
-	$id_pembanding  = getKriteriaID($pembanding);
+	$alternatif_id1 = getAlternatifID($alternatif1);
+	$alternatif_id2 = getAlternatifID($alternatif2);
+	$id_pembanding  = $pembanding;
+
+
 	$query  = "SELECT nilai FROM perbandingan_alternatif WHERE alternatif1 = $alternatif_id1 AND alternatif2 = $alternatif_id2 AND pembanding = $id_pembanding";
 	$result = $ci->db->query($query);
 	// cek jml data
@@ -205,7 +227,7 @@ function inputDataPerbandinganAlternatif($alternatif1,$alternatif2,$pembanding,$
 	$ci = &get_instance();
 	$alternatif_id1 = getAlternatifID($alternatif1);
 	$alternatif_id2 = getAlternatifID($alternatif2);
-	$id_pembanding  = getKriteriaID($pembanding);
+	$id_pembanding  = $pembanding;
 
 	$query  = "SELECT * FROM perbandingan_alternatif WHERE alternatif1 = $alternatif_id1 AND alternatif2 = $alternatif_id2 AND pembanding = $id_pembanding";
 	$result = $ci->db->query($query);

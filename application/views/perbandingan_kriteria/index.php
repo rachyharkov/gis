@@ -26,9 +26,6 @@
 												// push data ke array
 												$pilihan[] = $row->nama_kriteria;
 											}
-										} else {
-											echo "Data tidak ditemukan";
-											exit();
 										}
 										?>
 										<?php
@@ -76,7 +73,11 @@
 								</table>
 								<input type="text" name="jenis" value="kriteria" hidden>
 								<br><br>
-								<input class="btn btn-danger" type="submit" name="submit" value="SUBMIT">
+
+								<?php
+								if ($data->num_rows() > 0) { ?>
+									<input class="btn btn-danger" type="submit" name="submit" value="SUBMIT">
+								<?php } ?>							
 							</form>
 
 

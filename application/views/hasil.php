@@ -4,7 +4,7 @@
 $query = "SELECT * FROM alternatif";
 $data = $this->db->query($query);
 
-$query2 = "SELECT * FROM kriteria";
+$query2 = "SELECT * FROM alternatif";
 $data2 = $this->db->query($query2);
 
 $jmlKriteria 	= $data->num_rows();
