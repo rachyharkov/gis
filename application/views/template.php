@@ -74,25 +74,6 @@
                 <h3>Menu Utama</h3>
                 <ul class="nav side-menu">
                   <li><a href="<?php echo base_url() ?>home"><i class="fa fa-home"></i> Home</a></li>
-                  <li><a href="<?php echo base_url() ?>Skala"><i class="fa fa-list"></i> Skala Preferensi</a></li>
-                  <li><a href="<?php echo base_url() ?>Kriteria"><i class="fa fa-list"></i> Kriteria</a></li>
-                  <li><a href="<?php echo base_url() ?>Alternatif"><i class="fa fa-list"></i> Alternatif</a></li>
-									<li><a href="<?php echo base_url() ?>Perbandingan_kriteria"><i class="fa fa-circle-o"></i> Perbandingan Kriteria</a></li>
-									<li class=""><a><i class="fa fa-circle-o"></i> Perbandingan Alternatif <span class="fa fa-chevron-down"></span></a>
-										<ul class="nav child_menu" style="display: none;">
-
-										<?php
-											$query = "SELECT * FROM kriteria ORDER BY kriteria_id";
-											$data = $this->db->query($query)
-										?>
-										<?php
-											foreach ($data->result() as $row) { ?>
-												<li><a href="<?= base_url('perbandingan_alternatif/alt/' .$row->kriteria_id) ?>"><?= $row->nama_kriteria; ?></a></li>
-											<?php }
-										?>
-										</ul>
-									</li>
-									<li><a href="<?php echo base_url() ?>hasil"><i class="fa fa-circle-o"></i>Hasil</a></li>
                 
 								</ul>
               </div>
