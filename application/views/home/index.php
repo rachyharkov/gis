@@ -37,7 +37,7 @@
 	<div class="alert alert-success alert-dismissible " role="alert">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
 		</button>
-		<strong>SELAMAT DATANG DI APLIKASI SPK PEMILIHAN LAPTOP</strong>
+		<strong>SELAMAT DATANG DI APLIKASI GIS </strong>
 	</div>
 	<!-- <center>
 		<img src="<?= base_url() ?>assets/img/logo.png" alt="" style="width: 40%;padding-top:5%">

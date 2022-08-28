@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>SPK AHP</title>
+    <title>Aplikasi GIS</title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url() ?>assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -47,7 +47,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="<?php echo base_url() ?>home" class="site_title"><i class="fa fa-calendar"></i> <span>SPK AHP</span></a>
+              <a href="<?php echo base_url() ?>home" class="site_title"><i class="fa fa-map-marker" aria-hidden="true"></i> <span>Aplikasi GIS</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -74,6 +74,8 @@
                 <h3>Menu Utama</h3>
                 <ul class="nav side-menu">
                   <li><a href="<?php echo base_url() ?>home"><i class="fa fa-home"></i> Home</a></li>
+									<li><a href="<?php echo base_url() ?>objek_wisata"><i class="fa fa-map-marker" aria-hidden="true"></i> Objek Wisata</a></li>
+									<li><a href="<?php echo base_url() ?>sett_kecamatan/update/1"><i class="fa fa-cogs"></i> Sett Kecamatan</a></li>
                 
 								</ul>
               </div>
@@ -116,7 +118,10 @@
           </div>
         </div>
         <div class="right_col" role="main">
-          <?php echo $contents ?>
+				<div class="container">
+				<?php echo $contents ?>
+				</div>
+          
         </div>
         
       </div>

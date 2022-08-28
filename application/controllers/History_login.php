@@ -93,7 +93,7 @@ class History_login extends CI_Controller
 	    );
 
             $this->History_login_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success 2');
+            $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('history_login'));
         }
     }
