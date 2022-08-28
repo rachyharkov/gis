@@ -381,6 +381,12 @@
 			checkKosongLatLong()
 			
 		}
+
+		<?php
+			if($button == 'Update') {
+				echo "getToLoc($latitude, $longitude)";
+			}
+		?>
 		
 		// listen click on map
 		getLocationMap.on('click', function(e) {
