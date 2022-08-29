@@ -90,6 +90,12 @@ class Objek_wisata_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    function get_objek_wisata_picture_by_id($id)
+    {
+        $this->db->where('objek_wisata_id', $id);
+        return $this->db->get('objek_wisata_pic')->result();
+    }
+
 }
 
 /* End of file Objek_wisata_model.php */

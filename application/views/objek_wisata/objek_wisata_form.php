@@ -354,7 +354,7 @@
 		// render map
 
 		getLocationMap.scrollWheelZoom.disable()
-		getLocationMap.setView(new L.LatLng('-6.2349858', '106.9945444'), 14)
+		getLocationMap.setView(new L.LatLng('-6.8384545', '108.431134'), 14)
 		getLocationMap.addLayer(osm)
 		// initial hidden marker, and update on click
 		const getLocationMapMarker = L.marker([0, 0]).addTo(getLocationMap);								
