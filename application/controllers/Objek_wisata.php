@@ -278,6 +278,34 @@ class Objek_wisata extends CI_Controller
 		$this->form_validation->set_rules('objek_wisata_id', 'objek_wisata_id', 'trim');
 		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 	}
+
+	public function get_list_location() {
+		// output this data as json
+		$data = array();
+		foreach ($this->Objek_wisata_model->get_all() as $row) {
+			$data[] = array(
+				'objek_wisata_id' => $row->objek_wisata_id,
+				'nama_objek_wisata' => $row->nama_objek_wisata,
+				'alamat' => $row->alamat,
+				'jam_buka' => $row->jam_buka,
+				'jam_tutup' => $row->jam_tutup,
+				'telpon' => $row->telpon,
+				'fasilitas' => $row->fasilitas,
+				'harga_tiket' => $row->harga_tiket,
+				'link_video' => $row->link_video,
+				'latitude' => $row->latitude,
+				'longitude' => $row->longitude,
+			);
+		}
+		echo json_encode($data);
+	}
+
+	public function location_get() {
+		// get query params of q
+		$q = $this->input->get('q');
+		$data = $this->Objek_wisata_model->get_by_name($q);
+		echo json_encode($data);
+	}
 }
 
 /* End of file Objek_wisata.php */

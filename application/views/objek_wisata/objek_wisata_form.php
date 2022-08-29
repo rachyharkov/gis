@@ -349,12 +349,12 @@
 
 		// initialize OSM
 		const osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-		const osmAttrib='Sebangsa map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
+		const osmAttrib='Leaflet © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
 		const osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 50, attribution: osmAttrib});		
 		// render map
 
 		getLocationMap.scrollWheelZoom.disable()
-		getLocationMap.setView(new L.LatLng('-6.2349858', '106.9945444'), 17)
+		getLocationMap.setView(new L.LatLng('-6.2349858', '106.9945444'), 14)
 		getLocationMap.addLayer(osm)
 		// initial hidden marker, and update on click
 		const getLocationMapMarker = L.marker([0, 0]).addTo(getLocationMap);								

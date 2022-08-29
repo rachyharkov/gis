@@ -84,6 +84,12 @@ class Objek_wisata_model extends CI_Model
         $this->db->delete($this->table);
     }
 
+    function get_objek_wisata_like_name($nama_objek_wisata)
+    {
+        $this->db->like('nama_objek_wisata', $nama_objek_wisata);
+        return $this->db->get($this->table)->result();
+    }
+
 }
 
 /* End of file Objek_wisata_model.php */
