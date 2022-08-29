@@ -39,8 +39,4 @@
 		</button>
 		<strong>SELAMAT DATANG DI APLIKASI GIS </strong>
 	</div>
-	<!-- <center>
-		<img src="<?= base_url() ?>assets/img/logo.png" alt="" style="width: 40%;padding-top:5%">
-	</center> -->
-
 </div>
