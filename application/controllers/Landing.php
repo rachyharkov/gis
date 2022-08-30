@@ -34,7 +34,7 @@ class Landing extends CI_Controller {
                     $data[] = $value->photo;
                 }
             } else {
-                $data[] = 'default.jpeg';
+                $data[] = 'default.png';
             }
 
             return $data;
