@@ -59,7 +59,7 @@
                     </tr>
                     <tr>
                         <label style="font-size: 12px; font-weight: bold;">Link Video</label>
-                        <p style="font-size: 11px;"><?php echo $link_video; ?></p>
+                        <iframe width="100%" height="50%" src="https://www.youtube.com/embed/<?php echo $link_video; ?>?modestbranding=1&rel=1&controls=1&showinfo=1&html5=1&autoplay=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </tr>
                 </table>
             </div>
