@@ -76,6 +76,8 @@
 		-ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 		-o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+		overflow: hidden auto;
+		max-height: 34vh;
 	}
 
 	.search-box .results li { display: block }
@@ -280,7 +282,7 @@
 									<div class="search-box">
 										<input type="text" class="div-control" name="search-loc" id="search-loc" placeholder="Cari Lokasi"/>
 										<ul class="results" >
-											
+											<li style="text-align: center;padding: 50% 0; max-height: 25hv;">Masukan Pencarian</li>
 										</ul>
 									</div>
 								</td>
@@ -340,6 +342,14 @@
 				$('.alert-choose-loc').hide();
 			}
 		}
+
+		var delay = (function () {
+			var timer = 0;
+			return function (callback, ms) {
+				clearTimeout(timer);
+				timer = setTimeout(callback, ms);
+			};
+		})()
 
 		// ref: https://switch2osm.org/using-tiles/getting-started-with-leaflet/
 
@@ -410,28 +420,44 @@
 			getToLoc(lat,lng, dispname)
 		})
 
-		$('#search-loc').keyup(function() {
-			const search = $(this).val();
+		function doSearching(elem) {
+			$('.results').html('<li style="text-align: center;padding: 50% 0; max-height: 25hv;">Mengetik...</li>');
+			const search = elem.val()
+			delay(function () {
+				console.log('test');         
+				if(search.length >= 3) {
+					$('.results').html('<li style="text-align: center;padding: 50% 0; max-height: 25hv;"><i class="fa fa-refresh fa-spin"></i> Mencari...</li>');
+					const url = 'https://nominatim.openstreetmap.org/search?format=json&q=' + search;
+					$.ajax({
+						url: url,
+						dataType: 'json',
+						success: function(data) {
+							$('.results').empty();
+							if(data.length > 0) {
+								$.each(data, function(i, item) {
+									$('.results').append('<li><a class="resultnya" href="#" data-lat="' + item.lat + '" data-lng="' + item.lon + '" data-dispname="' + item.display_name + '">' + item.display_name + '<br/><i class="fa fa-map-marker"></i><span style="margin-left: 7px;">'+ item.lat + ','+ item.lon +'</span></a></li>');
+								})
+							} else {
+								$('.results').html('<li style="text-align: center;padding: 50% 0; max-height: 25hv;">Tidak ditemukan (Mungkin ada yang salah dengan ejaan, typo, atau kesalahan ketik)</li>');
+							}
+						}
+					});
+				} else {
+					$('.results').html('<li style="text-align: center;padding: 50% 0; max-height: 25hv;">Masukan Pencarian (Min. 3 Karakter)</li>');
+				}
+			}, 1000);
+		}
 
-			if(search.length > 3) {
-				$('.results').show();
-				const url = 'https://nominatim.openstreetmap.org/search?format=json&q=' + search;
-				$('.results').html('<li>Mencari...</li>');
-				$.ajax({
-					url: url,
-					dataType: 'json',
-					success: function(data) {
-						$('.results').empty();
-
-						$.each(data, function(i, item) {
-							$('.results').append('<li><a class="resultnya" href="#" data-lat="' + item.lat + '" data-lng="' + item.lon + '" data-dispname="' + item.display_name + '">' + item.display_name + '<br/><span>Description...</span></a></li>');
-						})
-					}
-				});
-			} else {
-				$('.results').html('<li>Masukan Pencarian</li>');
-			}
+		$('#search-loc').focus(function(){
+			$('.results').show();
+		}).keyup(function() {
+			doSearching($(this))
+		}).blur(function() {
+			setTimeout(function() {
+				$('.results').hide();
+			}, 1000);
 		})
+		$('#search-loc').on('paste', doSearching($(this)))
 		
 	});
 </script>
