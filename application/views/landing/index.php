@@ -420,6 +420,8 @@
             center: true,
             items: 1,
             loop: false,
+            nav: true,
+            dots: true,
             margin: 10,
             autoWidth: true,
             responsive: {

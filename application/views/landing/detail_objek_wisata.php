@@ -1,11 +1,28 @@
+<style>
+.owl-nav {
+    text-align: center;
+    font-size: 28px;
+    display: flex;
+    justify-content: space-evenly;
+}
+</style>
+
 <div style="padding: 3rem 1rem;">
     <div class="container">
         <div class="row" style="max-width: 768px; margin: auto;">
             <div class="col-md-6">
                 <h3 style="margin-bottom: 1.5rem;"><?php echo $nama_objek_wisata; ?></h3>
                 <div>
-                    <div style="height: 10rem; width: 100px; background: blue;">
-    
+                    <div class="owl-carousel owl-theme">
+                        <?php 
+                            foreach ($pictures as $value) {
+                                ?>
+                                <div class="item" style="height: 12rem;width: 100%;">
+                                    <img src="<?php echo base_url('assets/img/photo/'.$value); ?>" style="width: 100%;height: 100%;object-fit: contain;"/>
+                                </div>
+                                <?php
+                            }
+                        ?>
                     </div>
                 </div>
             </div>
@@ -57,3 +74,18 @@
         </div>
     </div>
 </div>
+<script>
+    var owl = $(".owl-carousel")
+    owl.owlCarousel()
+    $(document).ready(function() {
+        owl.data('owl.carousel').destroy()
+        $(".owl-carousel").owlCarousel({
+            center: true,
+            items: 1,
+            nav: true,
+            dots: true,
+            loop: false,
+            dots: true,
+        });
+    })
+</script>
