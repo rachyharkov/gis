@@ -159,7 +159,7 @@
             width: 5rem;
             border-radius: 50%;
             position: absolute;
-            top: -125%;
+            top: calc(-42vh - ((-44% + -76px)/2));
             left: 0;
             transform: translateX(50%);
             transition: all 0.5s ease-in-out;
@@ -267,7 +267,7 @@
 
         <div class="floating-element-cool">
             <div class="image-container" style="height: 80px; width: auto;">
-                <img src="https://desa-pasawahan.kuningankab.go.id/sites/des1857/files/pasawahan.png" alt="Logo Desa Pasawahan" style="object-fit: contain; width: 100%; height: 100%;">
+                <img src="<?php echo base_url() ?>assets/img/pasawahan-logo.png" alt="Logo Desa Pasawahan" style="object-fit: contain; width: 100%; height: 100%;">
             </div>
 
             <div class="search-box">
