@@ -35,7 +35,7 @@
 
         .map-embed {
             width: 100%;
-            height: 100vh;
+            height: 100%;
         }
 
         .floating-element-cool {
@@ -90,12 +90,6 @@
             height: 55rem;
         }
 
-        .map .ol-zoom {
-            top: 10px;
-            left: auto;
-            right: 10px;
-        }
-
         .owl-carousel {
             margin-top: 1rem;
         }
@@ -132,10 +126,9 @@
         }
 
         .floating-recommendation {
-            position: absolute;
-            bottom: -50%;
+            height: 0%;
+            overflow: hidden;
             width: 100%;
-            z-index: 999;
             background: white;
             transition: all 0.5s ease-in-out;
             -webkit-box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
@@ -145,7 +138,7 @@
             box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
         }
 
-        .button-recommendation {
+        #button-special {
             background-color: #4CAF50;
             border: none;
             color: white;
@@ -159,25 +152,35 @@
             width: 5rem;
             border-radius: 50%;
             position: absolute;
-            top: calc(-42vh - ((-44% + -76px)/2));
+            bottom: 2vh;
             left: 0;
+            z-index: 999;
             transform: translateX(50%);
             transition: all 0.5s ease-in-out;
         }
 
-        .button-recommendation svg {
+        #button-special svg {
             font-size: 24px;
             margin-bottom: 0px;
             transition: all 0.5s ease-in-out;
         }
 
         .floating-r-activated {
-            bottom: 0 !important;
+            height: 48vh;
             transition: all 0.5s ease-in-out;
         }
 
-        .floating-r-activated .button-recommendation{
-            top: -45px;
+        .a-bit-higher {
+            height: 70vh;
+        }
+
+        .floating-r-activated .button-recommendation {
+            bottom: 28vh !important;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .floating-r-activated .button-back {
+            bottom: 37vh !important;
             transition: all 0.5s ease-in-out;
         }
 
@@ -250,18 +253,50 @@
                 transform: translateX(-20px);
             }
         }
-
-        .leaflet-control-zoom.leaflet-bar.leaflet-control {
-            margin-bottom: 50vh !important;
-        }
     </style>
 </head>
 
 <body>
     <div class="container-fluid content" style="background-color: white; height: 100vh; width: 100%; padding: 0;">
-        <section>
+        <section style="display: flex; flex-direction: column; height: 100vh;">
             <div class="map-embed" id="map-embed">
                 
+            </div>
+            <div class="floating-recommendation" id="floating-recommendation">
+                <button class="button-recommendation" id="button-special">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                </button>
+                <div class="detail-wrapper">
+
+                </div>
+                <div class="floating-wrapper">
+                    <h3 style="text-align: center;margin-top:1rem;">Objek Wisata Pilihan</h3>
+                    <div class="owl-carousel" id="recommendation-objek-wisata">
+                        <?php
+                        foreach ($list_objek_wisata as $v) {
+
+
+                        ?>
+                            <div class="slide">
+                                <div class="slide-child">
+                                    <div class="img-wrapper">
+                                        <img class="lazy" style="opacity: 0;" alt="Sneakers &amp; Tennis shoes basse" data-src="<?php echo base_url('assets/img/photo/' . $da_controller->ListPicture($v->objek_wisata_id)[0]); ?>" alt="<?php echo $v->nama_objek_wisata; ?>" />
+                                        <div class="pong-loader"></div>
+                                    </div>
+                                    <div class="info-overview-wrapper">
+                                        <h4 style="font-size: 1.2rem;"><?= $v->nama_objek_wisata ?></h4>
+                                        <p style="font-size: 10px;"><?= $v->alamat ?></p>
+                                        <div>
+                                            <a class="btn btn-primary redirect-gmaps" data-lat="<?=$v->latitude?>" data-lng="<?=$v->longitude?>" href="http://maps.google.com/maps?z=12&t=m&q=loc:<?=$v->latitude?>+<?=$v->longitude?>" target="_blank" style="margin-right: 9px;"><i class="fa-solid fa-diamond-turn-right"></i></a><button class="btn btn-primary marker-w-info" data-lat="<?=$v->latitude?>" data-lng="<?=$v->longitude?>" id="<?=$v->objek_wisata_id?>" >Detail</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -274,38 +309,14 @@
                 <input type="text" class="div-control" name="search-loc" id="searchField" placeholder="Cari Nama Lokasi, Lat/Long, atau lainnya..." autocomplete="off" />
             </div>
         </div>
-        <div class="floating-recommendation">
-            <button class="button-recommendation">
-                <i class="fa-solid fa-map-location-dot"></i>
-            </button>
-            <div>
-                <h3 style="text-align: center;margin-top:1rem;">Objek Wisata Pilihan</h3>
-                <div class="owl-carousel" id="recommendation-objek-wisata">
-                    <?php
-                    foreach ($list_objek_wisata as $v) {
+    </div>
 
-
-                    ?>
-                        <div class="slide">
-                            <div class="slide-child">
-                                <div class="img-wrapper">
-                                    <img class="lazy" style="opacity: 0;" alt="Sneakers &amp; Tennis shoes basse" data-src="<?php echo base_url('assets/img/photo/' . $da_controller->ListPicture($v->objek_wisata_id)[0]); ?>" alt="<?php echo $v->nama_objek_wisata; ?>" />
-                                    <div class="pong-loader"></div>
-                                </div>
-                                <div class="info-overview-wrapper">
-                                    <h4 style="font-size: 1.2rem;">Nama Tempat</h4>
-                                    <p style="font-size: 10px;">Jl. Kampung Jati No.437</p>
-                                    <div>
-                                        <button class="btn btn-primary" style="margin-right: 9px;"><i class="fa-solid fa-diamond-turn-right"></i></button><button class="btn btn-primary">Detail</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php
-                    }
-                    ?>
-                </div>
+    <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex" id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body">
+            Tautan Google Maps telah terbuka
             </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
     </div>
 
@@ -404,6 +415,21 @@
 
         getLocationMap.zoomControl.setPosition('bottomright');
 
+        function fetchDetailPage(id) {
+
+            $.ajax({
+                url: '<?= base_url('landing/getdetail/') ?>' + id,
+        		type: 'GET',
+        		success: function(data){
+                    $('.detail-wrapper').css({display: 'block'}).html(data)
+                    $('.floating-recommendation').addClass('a-bit-higher')
+                    $('#button-special').removeClass().addClass('button-back').html('<i class="fa-solid fa-angle-left"></i>')
+                    $('.floating-wrapper').css({display: 'none'})
+        		}
+            })
+
+        }
+
         function refreshMarkers(data) {
         	let list_of_location = data
 
@@ -472,6 +498,42 @@
         	getLocationMapMarker.setLatLng([lat, lng])
 
         }
+
+        $(document).on('click', '.button-back', function() {
+            $('#floating-recommendation').removeClass('a-bit-higher').addClass('floating-r-activated')
+            $('.detail-wrapper').css({display: 'none'}).html('')
+            $('.floating-wrapper').css({display: 'block'})
+            $('#button-special').removeClass().addClass('button-recommendation').html('<i class="fa-solid fa-map-location-dot"></i>')
+        })
+
+        $(document).on('click','.redirect-gmaps', function() {
+        
+            const lat = $(this).data('lat')
+            const lng = $(this).data('lng')
+
+            const toastLiveExample = document.getElementById('liveToast')
+            const toast = new bootstrap.Toast(toastLiveExample)
+
+            toast.show()
+
+            getToLoc(lat, lng)
+        })
+
+        $(document).on('click', '.marker-w-info', function() {
+            const lat = $(this).data('lat')
+            const lng = $(this).data('lng')
+            const id = $(this).attr('id')
+
+            const toastLiveExample = document.getElementById('liveToast')
+            const toast = new bootstrap.Toast(toastLiveExample)
+
+            toast.show()
+
+            getToLoc(lat, lng)
+
+            fetchDetailPage(id)
+            
+        })
     });
 </script>
 
