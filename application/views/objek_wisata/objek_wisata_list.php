@@ -221,7 +221,7 @@
 		const osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 50, attribution: osmAttrib});		
 
 		getLocationMap.scrollWheelZoom.disable()
-		getLocationMap.setView(new L.LatLng('-6.2349858', '106.9945444'), 10)
+		getLocationMap.setView(new L.LatLng('-6.8384545', '108.431134'), 10)
 		getLocationMap.addLayer(osm)
 		const getLocationMapMarker = L.marker([0, 0]).addTo(getLocationMap);								
 		
