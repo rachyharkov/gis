@@ -100,6 +100,17 @@
             transition: all 0.5s ease-in-out;
         }
 
+        #results li a {
+            text-decoration: none;
+            font-size: 1rem;
+            color: black;
+            padding: 15px 5px 15px 24px;
+        }
+
+        #results li {
+            padding: 11px 5px 5px 18px;
+        }
+
         .lt-ie9 .search input#searchField {
             line-height: 26px
         }
@@ -482,7 +493,7 @@
 							$('.results').empty();
 							if(data.length > 0) {
 								$.each(data, function(i, item) {
-									$('.results').append('<li><a class="resultnya" href="#" data-lat="' + item.latitude + '" data-lng="' + item.longitude + '" data-dispname="' + item.nama_objek_wisata + '">' + item.nama_objek_wisata + '<br/><i class="fa fa-map-marker"></i><span style="margin-left: 7px;">'+ item.latitude + ','+ item.longitude +'</span></a></li>');
+									$('.results').append('<li><a class="resultnya" href="#" data-lat="' + item.latitude + '" data-lng="' + item.longitude + '" data-dispname="' + item.nama_objek_wisata + '">' + item.nama_objek_wisata + '<br/><i class="fa fa-map-marker"></i><span style="margin-left: 13px;font-size: 12px;">'+ item.latitude + ','+ item.longitude +'</span></a></li>');
 								})
 							} else {
 								$('.results').html('<li style="text-align: center;padding: 50% 0; max-height: 25hv;">Tidak ditemukan (Mungkin ada yang salah dengan ejaan, typo, atau kesalahan ketik)</li>');
