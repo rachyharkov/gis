@@ -201,6 +201,7 @@
         .floating-r-activated {
             height: 48vh;
             transition: all 0.5s ease-in-out;
+            overflow: hidden auto;
         }
 
         .a-bit-higher {
@@ -473,9 +474,7 @@
 			for(let i = 0; i < list_of_location.length; i++){
 				let marker = L.marker([list_of_location[i].latitude, list_of_location[i].longitude]).addTo(getLocationMap);
 				
-                marker.bindPopup(`<b>${list_of_location[i].nama_objek_wisata}</b><br>${list_of_location[i].alamat}<br>
-				<button class="btn btn-primary" style="color: white; margin-top: 1rem;">Detail</button>
-				`);
+                marker.bindPopup(`<b>${list_of_location[i].nama_objek_wisata}</b><br>${list_of_location[i].alamat}`);
 
 			}
         }
@@ -495,7 +494,7 @@
 							$('.results').empty();
 							if(data.length > 0) {
 								$.each(data, function(i, item) {
-									$('.results').append('<li><a class="resultnya" href="#" data-lat="' + item.latitude + '" data-lng="' + item.longitude + '" data-dispname="' + item.nama_objek_wisata + '">' + item.nama_objek_wisata + '<br/><i class="fa fa-map-marker"></i><span style="margin-left: 13px;font-size: 12px;">'+ item.latitude + ','+ item.longitude +'</span></a></li>');
+									$('.results').append('<li><a class="resultnya" data-id="'+ item.objek_wisata_id +'" href="#" data-lat="' + item.latitude + '" data-lng="' + item.longitude + '" data-dispname="' + item.nama_objek_wisata + '">' + item.nama_objek_wisata + '<br/><i class="fa fa-map-marker"></i><span style="margin-left: 13px;font-size: 12px;">'+ item.latitude + ','+ item.longitude +'</span></a></li>');
 								})
 							} else {
 								$('.results').html('<li style="text-align: center;padding: 50% 0; max-height: 25hv;">Tidak ditemukan (Mungkin ada yang salah dengan ejaan, typo, atau kesalahan ketik)</li>');
@@ -618,9 +617,13 @@
             e.preventDefault()
             const lat = $(this).data('lat')
             const lng = $(this).data('lng')
+            const id = $(this).data('id')
             $('#searchField').val($(this).data('dispname'))
             $('#results').removeClass('show-results')
+            $('#floating-recommendation').addClass('floating-r-activated')
+
             getToLoc(lat, lng)
+            fetchDetailPage(id)
         })
     });
 </script>
