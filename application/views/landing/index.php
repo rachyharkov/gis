@@ -46,6 +46,13 @@
             z-index: 999;
         }
 
+        .search-box {
+            overflow: hidden;
+            border-top-right-radius: 15px;
+            border-top-left-radius: 15px;
+            position: relative
+        }
+
         .search-box input#searchField {
             height: 45px;
             width: 100%;
@@ -63,7 +70,6 @@
             -ms-box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
             -o-box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
             box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
-            margin: 1rem 0;
             transition: all 0.5s ease-in-out;
         }
 
@@ -76,6 +82,22 @@
             -ms-box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
             -o-box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
             box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        }
+
+        .search-box .results {
+            background: white;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            padding: 0rem 0 0 0;
+            max-height: 40vh;
+            height: 0;
+            overflow: hidden auto;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .search-box .results.show-results {
+            height: 40vh !important;
+            transition: all 0.5s ease-in-out;
         }
 
         .lt-ie9 .search input#searchField {
@@ -307,6 +329,9 @@
 
             <div class="search-box">
                 <input type="text" class="div-control" name="search-loc" id="searchField" placeholder="Cari Nama Lokasi, Lat/Long, atau lainnya..." autocomplete="off" />
+                <ul class="results" id="results">
+
+                </ul>
             </div>
         </div>
     </div>
@@ -397,6 +422,14 @@
             $(".floating-recommendation").toggleClass("floating-r-activated");
         });
 
+        var delay = (function () {
+			var timer = 0;
+			return function (callback, ms) {
+				clearTimeout(timer);
+				timer = setTimeout(callback, ms);
+			};
+		})()
+
         // ref: https://switch2osm.org/using-tiles/getting-started-with-leaflet/
 
 
@@ -415,6 +448,53 @@
 
         getLocationMap.zoomControl.setPosition('bottomright');
 
+        function cleanMarkers() {				
+			getLocationMap.eachLayer(function (layer) {
+				if (layer.options.attribution !== osmAttrib) {
+					getLocationMap.removeLayer(layer);
+				}
+			})
+		}
+
+        function insertMarker(list_of_location) {
+			for(let i = 0; i < list_of_location.length; i++){
+				let marker = L.marker([list_of_location[i].latitude, list_of_location[i].longitude]).addTo(getLocationMap);
+				
+                marker.bindPopup(`<b>${list_of_location[i].nama_objek_wisata}</b><br>${list_of_location[i].alamat}<br>
+				<button class="btn btn-primary" style="color: white; margin-top: 1rem;">Detail</button>
+				`);
+
+			}
+        }
+
+        function doSearching(elem) {
+			$('.results').html('<li style="text-align: center;padding: 50% 0; max-height: 25hv;">Mengetik...</li>');
+			const search = elem.val()
+			delay(function () {
+				console.log('test');         
+				if(search.length >= 3) {
+					$('.results').html('<li style="text-align: center;padding: 50% 0; max-height: 25hv;"><i class="fa fa-refresh fa-spin"></i> Mencari...</li>');
+					const url = '<?php echo base_url().'landing/searchPlace?q=' ?>' + search;
+					$.ajax({
+						url: url,
+						dataType: 'json',
+						success: function(data) {
+							$('.results').empty();
+							if(data.length > 0) {
+								$.each(data, function(i, item) {
+									$('.results').append('<li><a class="resultnya" href="#" data-lat="' + item.latitude + '" data-lng="' + item.longitude + '" data-dispname="' + item.nama_objek_wisata + '">' + item.nama_objek_wisata + '<br/><i class="fa fa-map-marker"></i><span style="margin-left: 7px;">'+ item.latitude + ','+ item.longitude +'</span></a></li>');
+								})
+							} else {
+								$('.results').html('<li style="text-align: center;padding: 50% 0; max-height: 25hv;">Tidak ditemukan (Mungkin ada yang salah dengan ejaan, typo, atau kesalahan ketik)</li>');
+							}
+						}
+					});
+				} else {
+					$('.results').html('<li style="text-align: center;padding: 50% 0; max-height: 25hv;">Masukan Pencarian (Min. 3 Karakter)</li>');
+				}
+			}, 1000);
+		}
+
         function fetchDetailPage(id) {
 
             $.ajax({
@@ -432,64 +512,50 @@
 
         function refreshMarkers(data) {
         	let list_of_location = data
-
-
-        	getLocationMap.eachLayer(function (layer) {
-        		if (layer.options.attribution !== osmAttrib) {
-        			getLocationMap.removeLayer(layer);
-        		}
-        	})
-
-        	let list_of_location_html = ''
-        	for(let i = 0; i < list_of_location.length; i++){
-
-        		list_of_location_html += `<li class="list-group-item" data-lat="${list_of_location[i].latitude}" data-lng="${list_of_location[i].longitude}">${list_of_location[i].nama_objek_wisata}</li>`
-        		let marker = L.marker([list_of_location[i].latitude, list_of_location[i].longitude]).addTo(getLocationMap);
-        		marker.bindPopup(`<b>${list_of_location[i].nama_objek_wisata}</b><br>${list_of_location[i].alamat}<br>
-        		<a href="<?php echo base_url('objek_wisata/update/') ?>${list_of_location[i].objek_wisata_id}" class="btn btn-primary" style="color: white; margin-top: 1rem;">Edit</a>
-        		`);
-
-        	}
-        	$('.results').html(list_of_location_html)
+            cleanMarkers()
+        	insertMarker(list_of_location)
         }
 
-        $("#searchField").on("keyup change", function() {
-        	var input = $(this);
-        	table.search(input.val()).draw();
+        $('#searchField').focus(function(){
+			$('#results').addClass('show-results')
+		}).keyup(function() {
+			doSearching($(this))
+		})
 
-        	var array = table.rows({ search: 'applied' }).data();
-        	dataarray = []
-
-        	for(let i = 0; i < array.length; i++){
-        		dataarray.push({
-        			objek_wisata_id: array[i][1],
-        			latitude: array[i][9],
-        			longitude: array[i][10],
-        			nama_objek_wisata: array[i][2],
-        			alamat: array[i][3],
-        		})
-        	}
-        	if(input.val() != ''){
-        		$('.indikator-lagi-nyari').html('<b>Pencarian untuk : </b><i>' + input.val() + '</i> (' + dataarray.length + ' data ditemukan)')
-        		refreshMarkers(dataarray)
-        	} else {
-        		$('.indikator-lagi-nyari').empty()
-        	}
+        $(document).on("click", function(e) {
+            if (!$(e.target).closest(".search-box").length) {
+                $('#results').removeClass('show-results')
+            }
         });
 
+        $('#searchField').on('paste', doSearching($(this)))
+
         function GetListofLocation(){
-        	$.ajax({
-        		url: '<?= base_url('objek_wisata/get_list_location') ?>',
-        		type: 'GET',
-        		dataType: 'json',
-        		success: function(data){
-        			console.log(data)
-        			refreshMarkers(data)
-        		}
-        	})
+            let list_of_location = []
+            $.ajax({
+                url: '<?= base_url('landing/get_list_location') ?>',
+                type: 'GET',
+                success: function(data){
+                    return data
+                }
+            })
         }
 
-        GetListofLocation()
+        function initializeMarkerList() {
+            // get list of location
+            $.ajax({
+                url: '<?= base_url('landing/get_list_location') ?>',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data){
+                    console.log(data)
+                // refreshMarkers(data)
+                    insertMarker(data)
+                }
+            })
+        }
+
+        initializeMarkerList()
 
         function getToLoc(lat, lng, displayname = null) {
         	const zoom = 17;
@@ -533,6 +599,15 @@
 
             fetchDetailPage(id)
             
+        })
+
+        $(document).on('click', '.resultnya', function(e) {
+            e.preventDefault()
+            const lat = $(this).data('lat')
+            const lng = $(this).data('lng')
+            $('#searchField').val($(this).data('dispname'))
+            $('#results').removeClass('show-results')
+            getToLoc(lat, lng)
         })
     });
 </script>

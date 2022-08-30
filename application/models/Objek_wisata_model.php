@@ -32,17 +32,17 @@ class Objek_wisata_model extends CI_Model
     // get total rows
     function total_rows($q = NULL) {
         $this->db->like('objek_wisata_id', $q);
-	$this->db->or_like('nama_objek_wisata', $q);
-	$this->db->or_like('alamat', $q);
-	$this->db->or_like('jam_buka', $q);
-	$this->db->or_like('jam_tutup', $q);
-	$this->db->or_like('telpon', $q);
-	$this->db->or_like('fasilitas', $q);
-	$this->db->or_like('harga_tiket', $q);
-	$this->db->or_like('link_video', $q);
-	$this->db->or_like('latitude', $q);
-	$this->db->or_like('longitude', $q);
-	$this->db->from($this->table);
+        $this->db->or_like('nama_objek_wisata', $q);
+        $this->db->or_like('alamat', $q);
+        $this->db->or_like('jam_buka', $q);
+        $this->db->or_like('jam_tutup', $q);
+        $this->db->or_like('telpon', $q);
+        $this->db->or_like('fasilitas', $q);
+        $this->db->or_like('harga_tiket', $q);
+        $this->db->or_like('link_video', $q);
+        $this->db->or_like('latitude', $q);
+        $this->db->or_like('longitude', $q);
+        $this->db->from($this->table);
         return $this->db->count_all_results();
     }
 
@@ -94,6 +94,19 @@ class Objek_wisata_model extends CI_Model
     {
         $this->db->where('objek_wisata_id', $id);
         return $this->db->get('objek_wisata_pic')->result();
+    }
+
+    function searchPlace($q) {
+        $this->db->like('nama_objek_wisata', $q);
+        $this->db->or_like('alamat', $q);
+        $this->db->or_like('telpon', $q);
+        $this->db->or_like('fasilitas', $q);
+        $this->db->or_like('harga_tiket', $q);
+        $this->db->or_like('link_video', $q);
+        $this->db->or_like('latitude', $q);
+        $this->db->or_like('longitude', $q);
+        $this->db->from($this->table);
+        return $this->db->get()->result();
     }
 
 }
