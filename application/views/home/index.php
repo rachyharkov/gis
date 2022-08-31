@@ -83,5 +83,24 @@
 		</center>
 
 	</div>
+<<<<<<< HEAD
 
 </div>
+=======
+	<div class="alert alert-success alert-dismissible " role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+		</button>
+		<strong>SELAMAT DATANG DI APLIKASI GIS </strong>
+	</div>
+</div>
+<!-- show logo -->
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="x_panel" style="height:60vh;text-align: center;">
+			<div class="x_content">
+				<img src="<?= base_url('assets/img/pasawahan-logo.png') ?>" alt="logo" width="70%" style="object-fit: contain;">
+			</div>
+		</div>
+	</div>
+</div>
+>>>>>>> 1fc64b75e494328c896ee0d7ccc7afcefa53e128
