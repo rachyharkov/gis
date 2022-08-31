@@ -199,7 +199,7 @@
         }
 
         .floating-r-activated {
-            height: 48vh;
+            height: calc(405px + (2.5vh + 4rem));
             transition: all 0.5s ease-in-out;
             overflow: hidden auto;
         }
@@ -209,7 +209,7 @@
         }
 
         .floating-r-activated .button-recommendation {
-            bottom: 28vh !important;
+            bottom: calc(194px + (2.5vh + 4rem)) !important;
             transition: all 0.5s ease-in-out;
         }
 

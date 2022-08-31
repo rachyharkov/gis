@@ -40,3 +40,13 @@
 		<strong>SELAMAT DATANG DI APLIKASI GIS </strong>
 	</div>
 </div>
+<!-- show logo -->
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="x_panel" style="height:60vh;text-align: center;">
+			<div class="x_content">
+				<img src="<?= base_url('assets/img/pasawahan-logo.png') ?>" alt="logo" width="70%" style="object-fit: contain;">
+			</div>
+		</div>
+	</div>
+</div>
