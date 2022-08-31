@@ -48,7 +48,7 @@
               <div class="separator">
 
                 <div>
-                  <p>©<?= date('Y') ?> - APLIKASI PENERIMA BANTUAN LANGSUNG TUNAI KABUPATEN TIMOR TENGAH UTARA</p>
+                  <p>©<?= date('Y') ?> - Application Geographic Information System</p>
                 </div>
               </div>
             </form>
