@@ -192,37 +192,37 @@
 						<div class="box-body">
 							<table class='table table-bordered'>
 								<tr>
-									<td width='200'>Nama Objek Wisata <?php echo form_error('nama_objek_wisata') ?></td>
+									<td >Nama Objek Wisata <?php echo form_error('nama_objek_wisata') ?></td>
 									<td><input type="text" class="form-control" name="nama_objek_wisata" id="nama_objek_wisata" placeholder="Nama Objek Wisata" value="<?php echo $nama_objek_wisata; ?>" /></td>
 								</tr>
 	
 								<tr>
-									<td width='200'>Alamat <?php echo form_error('alamat') ?></td>
+									<td >Alamat <?php echo form_error('alamat') ?></td>
 									<td> <textarea class="form-control" rows="3" name="alamat" id="alamat" placeholder="Alamat"><?php echo $alamat; ?></textarea></td>
 								</tr>
 								<tr>
-									<td width='200'>Jam Buka <?php echo form_error('jam_buka') ?></td>
+									<td >Jam Buka <?php echo form_error('jam_buka') ?></td>
 									<td><input type="text" class="form-control" name="jam_buka" id="jam_buka" placeholder="Jam Buka" value="<?php echo $jam_buka; ?>" /></td>
 								</tr>
 								<tr>
-									<td width='200'>Jam Tutup <?php echo form_error('jam_tutup') ?></td>
+									<td >Jam Tutup <?php echo form_error('jam_tutup') ?></td>
 									<td><input type="text" class="form-control" name="jam_tutup" id="jam_tutup" placeholder="Jam Tutup" value="<?php echo $jam_tutup; ?>" /></td>
 								</tr>
 								<tr>
-									<td width='200'>Telpon <?php echo form_error('telpon') ?></td>
+									<td >Telpon <?php echo form_error('telpon') ?></td>
 									<td><input type="text" class="form-control" name="telpon" id="telpon" placeholder="Telpon" value="<?php echo $telpon; ?>" /></td>
 								</tr>
 	
 								<tr>
-									<td width='200'>Fasilitas <?php echo form_error('fasilitas') ?></td>
+									<td >Fasilitas <?php echo form_error('fasilitas') ?></td>
 									<td> <textarea class="form-control" rows="3" name="fasilitas" id="fasilitas" placeholder="Fasilitas"><?php echo $fasilitas; ?></textarea></td>
 								</tr>
 								<tr>
-									<td width='200'>Harga Tiket <?php echo form_error('harga_tiket') ?></td>
+									<td >Harga Tiket <?php echo form_error('harga_tiket') ?></td>
 									<td><input type="text" class="form-control" name="harga_tiket" id="harga_tiket" placeholder="Harga Tiket" value="<?php echo $harga_tiket; ?>" /></td>
 								</tr>
 								<tr>
-									<td width='200'>Link Video <?php echo form_error('link_video') ?></td>
+									<td >Link Video <?php echo form_error('link_video') ?></td>
 									<td><input type="text" class="form-control" name="link_video" id="link_video" placeholder="Link Video" value="<?php echo $link_video; ?>" /></td>
 								</tr>
 							</table>

@@ -14,7 +14,7 @@
 						<table class='table table-bordered'>
 
 							<tr>
-								<td width='200'>Username <?php echo form_error('username') ?></td>
+								<td >Username <?php echo form_error('username') ?></td>
 								<td><input type="text" class="form-control" name="username" id="username" placeholder="Username" value="<?php echo $username; ?>" /></td>
 							</tr>
 							<?php if ($this->uri->segment(2) == "create" || $this->uri->segment(2) == "create_action") { ?>
@@ -32,7 +32,7 @@
 							<?php } ?>
 
 							<tr>
-								<td width='200'>Level <?php echo form_error('level') ?></td>
+								<td >Level <?php echo form_error('level') ?></td>
 								<td><select name="level" class="form-control" value="<?= $level ?>">
 										<option value="">-- Pilih --</option>
 										<option value="ADMIN" <?php echo $level == 'ADMIN' ? 'selected' : 'null' ?>>ADMIN</option>
@@ -63,7 +63,7 @@
 
 
 							<tr>
-								<td width='200'>Email <?php echo form_error('email') ?></td>
+								<td >Email <?php echo form_error('email') ?></td>
 								<td><input type="text" class="form-control" name="email" id="email" placeholder="Email" value="<?php echo $email; ?>" /></td>
 							</tr>
 							<tr>

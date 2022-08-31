@@ -77,16 +77,6 @@
 			?>
 	</center>
 	<br>
-	<div class="row">
-		<center>
-			<img src="<?= base_url() ?>assets/img/banner.png" alt="">
-		</center>
-
-	</div>
-<<<<<<< HEAD
-
-</div>
-=======
 	<div class="alert alert-success alert-dismissible " role="alert">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
 		</button>
@@ -103,4 +93,3 @@
 		</div>
 	</div>
 </div>
->>>>>>> 1fc64b75e494328c896ee0d7ccc7afcefa53e128
