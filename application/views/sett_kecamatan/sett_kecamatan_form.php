@@ -12,22 +12,22 @@
 					<form action="<?php echo $action; ?>" method="post">
 
 						<table class='table table-bordered>' <tr>
-							<td width='200'>Nama Kecamatan <?php echo form_error('nama_kecamatan') ?></td>
+							<td >Nama Kecamatan <?php echo form_error('nama_kecamatan') ?></td>
 							<td><input type="text" class="form-control" name="nama_kecamatan" id="nama_kecamatan" placeholder="Nama Kecamatan" value="<?php echo $nama_kecamatan; ?>" /></td>
 							</tr>
 
 							<tr>
-								<td width='200'>Alamat <?php echo form_error('alamat') ?></td>
+								<td >Alamat <?php echo form_error('alamat') ?></td>
 								<td> <textarea class="form-control" rows="3" name="alamat" id="alamat" placeholder="Alamat"><?php echo $alamat; ?></textarea></td>
 							</tr>
 							<tr>
-								<td width='200'>Email <?php echo form_error('email') ?></td>
+								<td >Email <?php echo form_error('email') ?></td>
 								<td><input type="text" class="form-control" name="email" id="email" placeholder="Email" value="<?php echo $email; ?>" /></td>
 							</tr>
 
 							<tr>
-								<td width='200'>Deskripsi <?php echo form_error('deskripsi') ?></td>
-								<td> <textarea class="form-control" rows="3" name="deskripsi" id="deskripsi" placeholder="Deskripsi"><?php echo $deskripsi; ?></textarea></td>
+								<td >Deskripsi <?php echo form_error('deskripsi') ?></td>
+								<td> <textarea class="form-control" rows="7" name="deskripsi" id="deskripsi" placeholder="Deskripsi"><?php echo $deskripsi; ?></textarea></td>
 							</tr>
 							<tr>
 								<td></td>
