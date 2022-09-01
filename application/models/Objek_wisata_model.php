@@ -31,14 +31,12 @@ class Objek_wisata_model extends CI_Model
     
     // get total rows
     function total_rows($q = NULL) {
-        $this->db->like('objek_wisata_id', $q);
-        $this->db->or_like('nama_objek_wisata', $q);
+        $this->db->like('nama_objek_wisata', $q);
         $this->db->or_like('alamat', $q);
         $this->db->or_like('jam_buka', $q);
         $this->db->or_like('jam_tutup', $q);
         $this->db->or_like('telpon', $q);
         $this->db->or_like('fasilitas', $q);
-        $this->db->or_like('harga_tiket', $q);
         $this->db->or_like('link_video', $q);
         $this->db->or_like('latitude', $q);
         $this->db->or_like('longitude', $q);
@@ -49,14 +47,12 @@ class Objek_wisata_model extends CI_Model
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
-        $this->db->like('objek_wisata_id', $q);
-	$this->db->or_like('nama_objek_wisata', $q);
+	$this->db->like('nama_objek_wisata', $q);
 	$this->db->or_like('alamat', $q);
 	$this->db->or_like('jam_buka', $q);
 	$this->db->or_like('jam_tutup', $q);
 	$this->db->or_like('telpon', $q);
 	$this->db->or_like('fasilitas', $q);
-	$this->db->or_like('harga_tiket', $q);
 	$this->db->or_like('link_video', $q);
 	$this->db->or_like('latitude', $q);
 	$this->db->or_like('longitude', $q);
@@ -101,7 +97,6 @@ class Objek_wisata_model extends CI_Model
         $this->db->or_like('alamat', $q);
         $this->db->or_like('telpon', $q);
         $this->db->or_like('fasilitas', $q);
-        $this->db->or_like('harga_tiket', $q);
         $this->db->or_like('link_video', $q);
         $this->db->or_like('latitude', $q);
         $this->db->or_like('longitude', $q);

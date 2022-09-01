@@ -32,12 +32,11 @@ class History_login_model extends CI_Model
     
     // get total rows
     function total_rows($q = NULL) {
-        $this->db->like('id', $q);
-	$this->db->or_like('user_id', $q);
-	$this->db->or_like('info', $q);
-	$this->db->or_like('tanggal', $q);
-	$this->db->or_like('user_agent', $q);
-	$this->db->from($this->table);
+	    
+        $this->db->like('info', $q);
+        $this->db->or_like('tanggal', $q);
+        $this->db->or_like('user_agent', $q);
+        $this->db->from($this->table);
         return $this->db->count_all_results();
     }
 
@@ -45,8 +44,7 @@ class History_login_model extends CI_Model
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->join('user', 'history_login.user_id = user.user_id', 'left');
         $this->db->order_by($this->id, $this->order);
-        $this->db->like('id', $q);
-    $this->db->or_like('username', $q);
+    $this->db->like('username', $q);
     $this->db->or_like('info', $q);
     $this->db->or_like('tanggal', $q);
     $this->db->or_like('user_agent', $q);

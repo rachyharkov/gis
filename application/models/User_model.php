@@ -58,8 +58,7 @@ class User_model extends CI_Model
     
     // get total rows
     function total_rows($q = NULL) {
-        $this->db->like('user_id', $q);
-	$this->db->or_like('username', $q);
+	$this->db->like('username', $q);
 	$this->db->or_like('password', $q);
 	$this->db->or_like('level', $q);
 	$this->db->or_like('photo', $q);
@@ -71,8 +70,7 @@ class User_model extends CI_Model
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
-        $this->db->like('user_id', $q);
-	$this->db->or_like('username', $q);
+	$this->db->like('username', $q);
 	$this->db->or_like('password', $q);
 	$this->db->or_like('level', $q);
 	$this->db->or_like('photo', $q);
