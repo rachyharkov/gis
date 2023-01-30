@@ -537,7 +537,25 @@
 									prepareData(formData)
 								})
 								$(document).on('click','.btn-act-update', function() {
-									window.location.replace('<?= base_url('objek_wisata/update/') ?>' + data.id)
+									Swal.showLoading()
+									$.ajax({
+										url: '<?= base_url('objek_wisata/update_action_all_like') ?>',
+										type: 'POST',
+										data: formData,
+										processData: false,
+										contentType: false,
+										success: function(data) {
+											Swal.fire({
+												title: "Berhasil!",
+												text: "Data berhasil disimpan",
+												icon: "success",
+												buttons: false,
+												timer: 2000,
+											}).then(() => {
+												window.location.href = '<?= base_url('objek_wisata') ?>';
+											});
+										}
+									})
 								})
 								$(document).on('click', '.btn-act-cancel', function() {
 									Swal.close()

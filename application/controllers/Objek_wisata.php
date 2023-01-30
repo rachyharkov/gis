@@ -166,6 +166,67 @@ class Objek_wisata extends CI_Controller
 		return $this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
 
+	public function update_action_all_like() {
+
+		
+		$data = array(
+			'nama_objek_wisata' => $this->input->post('nama_objek_wisata', TRUE),
+			'alamat' => $this->input->post('alamat', TRUE),
+			'deskripsi' => $this->input->post('deskripsi', TRUE),
+			'jam_buka' => $this->input->post('jam_buka', TRUE),
+			'jam_tutup' => $this->input->post('jam_tutup', TRUE),
+			'telepon' => $this->input->post('telepon', TRUE),
+			'fasilitas' => $this->input->post('fasilitas', TRUE),
+			'harga_tiket' => $this->input->post('harga_tiket', TRUE),
+			'link_video' => $this->input->post('link_video', TRUE),
+			'latitude' => $this->input->post('latitude', TRUE),
+			'longitude' => $this->input->post('longitude', TRUE),
+		);
+		$resultnya = $this->db->query("SELECT * from objek_wisata where nama_objek_wisata = '".$data['nama_objek_wisata']."'")->result();
+		
+		foreach($resultnya as $c) {
+			$this->db->where('objek_wisata_id', $c->objek_wisata_id)->update('objek_wisata', $data);
+
+			$finddatapic = $this->db->get_where('objek_wisata_pic', ['objek_wisata_id' => $c->objek_wisata_id])->result();
+
+			foreach ($finddatapic as $key => $value) {
+				unlink('./assets/img/photo/'.$value->photo);
+				$this->db->where('objek_wisata_pic_id', $value->objek_wisata_pic_id)->delete('objek_wisata_pic');
+			}
+
+			$jumlah_photo = count($_FILES['photo']['name']);
+			if($jumlah_photo > 0) {
+				$config['upload_path']          = './assets/img/photo';
+				$config['allowed_types']        = 'jpg|png|jpeg';
+				$config['max_size']             = 10048;
+				$config['encrypt_name']         = true;
+				$this->load->library('upload', $config);
+
+				for ($i = 0; $i < $jumlah_photo; $i++) {
+					echo $_FILES['photo']['name'][$i];
+					$_FILES['file']['name'] = $_FILES['photo']['name'][$i];
+					$_FILES['file']['type'] = $_FILES['photo']['type'][$i];
+					$_FILES['file']['tmp_name'] = $_FILES['photo']['tmp_name'][$i];
+					$_FILES['file']['error'] = $_FILES['photo']['error'][$i];
+					$_FILES['file']['size'] = $_FILES['photo']['size'][$i];
+					$this->upload->do_upload('file');
+					$uploadData = $this->upload->data();
+					$data2['objek_wisata_id'] = $c->objek_wisata_id;
+					$data2['photo'] = $uploadData['file_name'];
+					$this->db->insert('objek_wisata_pic', $data2);
+				}
+			}
+
+		}
+
+		$response = array(
+			"status" => "success",
+			"message" => "Data berhasil disimpan",
+		);
+
+		// return $this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
 	public function update($id)
 	{
 		$row = $this->Objek_wisata_model->get_by_id($id);
@@ -342,9 +403,8 @@ class Objek_wisata extends CI_Controller
 		echo json_encode($data);
 	}
 
-	public function cek_name()
+	public function cek_name($nama)
 	{
-		$nama = $this->input->post('nama_objek_wisata', TRUE);
 		$cek = $this->db->query("SELECT * from objek_wisata where nama_objek_wisata ='$nama'");
 		if ($cek->num_rows() > 0) {
 			return $cek->row()->objek_wisata_id;
