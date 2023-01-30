@@ -1,6 +1,6 @@
 <div class="page-title">
 	<div class="title_left">
-		<h3>UPDATE DATA SETT_KECAMATAN</h3>
+		<h3>UPDATE DATA SETT KECAMATAN</h3>
 	</div>
 	<div class="clearfix"></div>
 	<div class="row">

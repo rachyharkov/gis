@@ -80,7 +80,7 @@
 	<div class="alert alert-success alert-dismissible " role="alert">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
 		</button>
-		<strong>SELAMAT DATANG DI APLIKASI GIS </strong>
+		<strong>SELAMAT DATANG DI APLIKASI SISTEM INFORMASI GEOGRAFIS OBJEK WISATA KECAMATAN PASAWAHAN </strong>
 	</div>
 </div>
 <!-- show logo -->

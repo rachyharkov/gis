@@ -30,12 +30,16 @@
                 <!-- create button group -->
                 <div class="btn-group" role="group" aria-label="Basic example" style="margin-bottom: 1.5rem; width: 77%;margin-left: 14%;">
                     <a class="btn btn-secondary" href="http://maps.google.com/maps?z=12&t=m&q=loc:<?=$latitude?>+<?=$longitude?>" target="_blank" rel="noopener noreferrer">Buka di Google Maps</a>
-                    <a class="btn btn-success" href="tel:<?=$telpon ?>">Hubungi</a>
+                    <a class="btn btn-success" href="tel:<?=$telepon ?>">Hubungi</a>
                 </div>
                 <table>
                     <tr>
                         <label style="font-size: 12px; font-weight: bold;">Alamat</label>
                         <p style="font-size: 11px;"><?php echo $alamat; ?></p>
+                    </tr>
+                    <tr>
+                        <label style="font-size: 12px; font-weight: bold;">Deskripsi</label>
+                        <p style="font-size: 11px;"><?php echo $deskripsi; ?></p>
                     </tr>
                     <tr>
                         <label style="font-size: 12px; font-weight: bold;">Jam Buka</label>
@@ -46,8 +50,8 @@
                         <p style="font-size: 11px;"><?php echo $jam_tutup; ?></p>
                     </tr>
                     <tr>
-                        <label style="font-size: 12px; font-weight: bold;">Telpon</label>
-                        <p style="font-size: 11px;"><?php echo $telpon; ?></p>
+                        <label style="font-size: 12px; font-weight: bold;">telepon</label>
+                        <p style="font-size: 11px;"><?php echo $telepon; ?></p>
                     </tr>
                     <tr>
                         <label style="font-size: 12px; font-weight: bold;">Fasilitas</label>

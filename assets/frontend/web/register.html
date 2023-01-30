@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+
+<!-- Mirrored from evdigi.my.id/sitarius/web/register by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Oct 2022 14:12:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta name="description" content="aplikasi daiklat" />
+	<meta name="keywords" content="badiklat sulut" />
+	<meta name="author" content="Inggit Gustiar" />
+	<title>Web Sitarius</title>
+	<link href="../assets/front/img/baner.png" rel="shortcut icon" type="image/png">
+	<link href="../assets/front/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="../assets/front/css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+	<link href="../assets/front/css/animate.css" rel="stylesheet" type="text/css">
+	<link href="../assets/front/css/css-plugin-collections.css" rel="stylesheet" />
+	<link href="../assets/front/css/menuzord-megamenu.css" rel="stylesheet" />
+	<link href="../assets/front/css/menuzord-skins/menuzord-boxed.css" rel="stylesheet" />
+	<link href="../assets/front/css/style-main.css" rel="stylesheet" type="text/css">
+	<link href="../assets/front/css/custom-bootstrap-margin-padding.css" rel="stylesheet" type="text/css">
+	<link href="../assets/front/css/responsive.css" rel="stylesheet" type="text/css">
+	<link href="../assets/front/js/revolution-slider/css/settings.css" rel="stylesheet" type="text/css" />
+	<link href="../assets/front/js/revolution-slider/css/layers.css" rel="stylesheet" type="text/css" />
+	<link href="../assets/front/js/revolution-slider/css/navigation.css" rel="stylesheet" type="text/css" />
+	<link href="../assets/front/css/colors/theme-skin-color-set1.css" rel="stylesheet" type="text/css">
+	<script src="../assets/front/js/jquery-2.2.4.min.js"></script>
+	<script src="../assets/front/js/jquery-ui.min.js"></script>
+	<script src="../assets/front/js/bootstrap.min.js"></script>
+	<script src="../assets/front/js/jquery-plugin-collection.js"></script>
+</head>
+
+
+<body class="">
+	<div class="modal" id="myModal" style="margin-top: 150px;">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Login Akun</h4>
+
+				</div>
+				<form method="POST" action="https://evdigi.my.id/sitarius/web/login">
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="nip">NIP</label>
+							<input type="text" name="nip" class="form-control" id="nip" aria-describedby="emailHelp" placeholder="NIP" required>
+						</div>
+						<div class="form-group">
+							<label for="password">Password</label>
+							<input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="fa fa-times"></i> Close</button>
+						<button type="submit" name="login" class="btn btn-primary"> <i class="fa fa-arrow-right"></i> Login </button>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+	<div id="wrapper" class="clearfix">
+		<!-- Header -->
+		<header id="header" class="header header-floating header-floating-text-dark">
+			<div class="header-nav navbar-sticky navbar-sticky-animated">
+				<div class="header-nav-wrapper">
+					<div class="container">
+						<nav id="menuzord-right" class="menuzord default no-bg">
+							<a class="menuzord-brand switchable-logo pull-left flip mb-15" href="../index.html">
+								<img class="logo-default" src="../assets/front/img/logo-badiklat-sulut-white.png" alt="">
+								<img class="logo-scrolled-to-fixed" src="../assets/front/img/logo.png" alt="">
+							</a>
+
+														<ul class="menuzord-menu onepage-nav">
+								<li class="active"><a href="../index.html">Home</a></li>
+																	<li><a href="register.html">Register</a></li>
+									<li><a data-toggle="modal" data-target="#myModal" href="#exampleModal">Login</a></li>
+															</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<!-- Start main-content -->
+		<div class="flash-data" data-flashdata=""></div>
+		
+		<div class="flash-data2" data-flashdata2=""></div>
+		
+
+		<div class="main-content">
+	<!-- Section: inner-header -->
+	<section class="inner-header divider layer-overlay overlay-theme-colored-7" data-bg-img="https://evdigi.my.id/sitarius/assets/front/img/head.png" style="background-image: url(_images/bg/bg1.html);">
+		<div class="container pt-120 pb-60">
+			<!-- Section Content -->
+			<div class="section-content">
+				<div class="row">
+
+					<div class="col-md-6">
+						<h2 class="text-theme-colored2 font-36">Register</h2>
+						<ol class="breadcrumb text-left mt-10 white">
+							<li><a href="#">Home</a></li>
+							<li class="active">Register Peserta</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Section: About -->
+	<section>
+		
+		<div class="container">
+			<div class="row" style="padding: 15px;">
+			<h2 class="text-uppercase title">Register <span class="text-theme-colored2">Peserta</span></h2>
+				<form action="https://evdigi.my.id/sitarius/web/create_action" method="post" enctype="multipart/form-data">
+					<thead>
+						<table id="data-table-default" class="table table-bordered table-hover table-td-valign-middle table-sm">
+							<tr>
+								<td>Photo </td>
+								<td><input type="file" class="form-control" name="photo" id="photo" placeholder="photo" required="" value="" onchange="return validasiEkstensi()" />
+									<!-- <div id="preview"></div> -->
+								</td>
+							</tr>
+							<tr>
+								<td>Nip </td>
+								<td><input type="text" class="form-control" name="nip" id="nip" placeholder="Nip" value="" /></td>
+							</tr>
+							<tr>
+								<td>Nama Lengkap </td>
+								<td><input type="text" class="form-control" name="nama_lengkap" id="nama_lengkap" placeholder="Nama Lengkap" value="" /></td>
+							</tr>
+							<tr>
+								<td>Email </td>
+								<td><input type="text" class="form-control" name="email" id="email" placeholder="Email" value="" /></td>
+							</tr>
+							<tr>
+								<td>No Hp </td>
+								<td><input type="text" class="form-control" name="no_hp" id="no_hp" placeholder="No Hp" value="" /></td>
+							</tr>
+							<tr>
+								<td>Tempat Lahir </td>
+								<td><input type="text" class="form-control" name="tempat_lahir" id="tempat_lahir" placeholder="Tempat Lahir" value="" /></td>
+							</tr>
+							<tr>
+								<td>Tanggal Lahir </td>
+								<td><input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir" placeholder="Tanggal Lahir" value="" /></td>
+							</tr>
+							<tr>
+								<td>Jenis Kelamin </td>
+								<td><select name="jenis_kelamin" class="form-control theSelect" value="">
+										<option value="">-- Pilih --</option>
+										<option value="Laki Laki" null>Laki Laki</option>
+										<option value="Perempuan" null>Perempuan</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>Pangkat/Golongan</td>
+								<td>
+									<select name="pangkat" class="form-control theSelect">
+										<option value="">-- Pilih -- </option>
+																																	<option value="1">Pembina Utama - IV - E </option>
+																														</select>
+								</td>
+							</tr>
+							<tr>
+								<td>Jabatan </td>
+								<td><input type="text" class="form-control" name="jabatan" id="jabatan" placeholder="Jabatan" value="" /></td>
+							</tr>
+
+							<tr>
+								<td>Kantor Wilayah</td>
+								<td>
+									<select name="kantor_wilayah" class="form-control theSelect">
+										<option value="">-- Pilih -- </option>
+																																	<option value="2">Sulawesi Selatan</option>
+																																												<option value="1">Sulawesi Utara</option>
+																														</select>
+								</td>
+							</tr>
+
+
+							<tr>
+								<td>Upt </td>
+								<td><input type="text" class="form-control" name="upt" id="upt" placeholder="Upt" value="" /></td>
+							</tr>
+							<tr>
+								<td>Bank</td>
+								<td>
+									<select name="bank_id" class="form-control theSelect">
+										<option value="">-- Pilih -- </option>
+																																	<option value="3">Mandiri</option>
+																																												<option value="2">BRI</option>
+																																												<option value="1">BNI</option>
+																														</select>
+								</td>
+							</tr>
+							<tr>
+								<td>Norek </td>
+								<td><input type="text" class="form-control" name="norek" id="norek" placeholder="Norek" value="" /></td>
+							</tr>
+							<tr>
+								<td>Password </td>
+								<td><input type="password" class="form-control" name="password" id="password" placeholder="Password" value="" /></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><input type="hidden" name="peserta_id" value="" />
+									<button type="submit" class="btn btn-danger"><i class="fa fa-save"></i> Simpan</button>
+								</td>
+							</tr>
+					</thead>
+					</table>
+				</form>
+			</div>
+		</div>
+	</section>
+</div>
+		<!-- Footer -->
+		<footer id="footer" class="footer" data-bg-color="#212331" style="background: rgb(33, 35, 49) !important;">
+			<div class="container pt-70 pb-40">
+				<div class="row">
+					<div class="col-sm-6 col-md-3">
+						<div class="widget dark">
+							<img class="mt-5 mb-20" alt="" src="../assets/front/img/logo-badiklat-sulut-white.png">
+							<p>Jl. H. Tumundo, Pinokalan, Kec. Ranowulu, Kota Bitung, Sulawesi Utara</p>
+							<ul class="list-inline mt-5">
+								<li class="m-0 pl-10 pr-10"> <i class="fa fa-phone text-theme-colored2 mr-5"></i> <a class="text-gray" href="#">0852-4000-2163</a> </li>
+								<li class="m-0 pl-10 pr-10"> <i class="fa fa-envelope-o text-theme-colored2 mr-5"></i> <a class="text-gray" href="#">info@sitarius.com</a> </li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6 col-md-3">
+						<div class="widget dark">
+							<h4 class="widget-title line-bottom-theme-colored-2">Link Terkait</h4>
+							<ul class="angle-double-right list-border">
+								<li><a href="https://sulut.kemenkumham.go.id/" target="_blank">Website Kanwil Sulut</a></li>
+								<li><a href="https://kemenkumham.go.id/" target="_blank">Website Kumenkumham RI</a></li>
+								<li><a href="https://badiklat-sulut.kemenkumham.go.id/" target="_blank">Website Badiklat Sulut</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6 col-md-3">
+						<div class="widget dark">
+							<h4 class="widget-title line-bottom-theme-colored-2">Pelatihan</h4>
+							<div class="latest-posts">
+								<article class="post media-post clearfix pb-0 mb-10">
+									<div class="post-right">
+										<h5 class="post-title mt-0 mb-5"><a href="#">Jadwal Pendaftaran dan Tahapan Seleksi Anggota Polri 2021-2022</a></h5>
+										<p class="post-date mb-0 font-12">2021-03-18</p>
+										<p class="post-date mb-0 font-12">By Inggit Gustiar</p>
+									</div>
+								</article>
+
+								<article class="post media-post clearfix pb-0 mb-10">
+									<div class="post-right">
+										<h5 class="post-title mt-0 mb-5"><a href="#">Siap-siap Penerimaan Polri 2021: dari Tamtama, Bintara hingga Akpol</a></h5>
+										<p class="post-date mb-0 font-12">2021-03-17</p>
+										<p class="post-date mb-0 font-12">By Inggit Gustiar</p>
+									</div>
+								</article>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-6 col-md-3">
+						<div class="widget dark">
+							<h4 class="widget-title line-bottom-theme-colored-2">Sosial Media</h4>
+							<div class="opening-hours">
+								<ul class="styled-icons icon-sm icon-bordered icon-circled clearfix mt-10">
+									<li><a href="https://www.facebook.com/KemenkumhamRIofficial" target="_blank"><i class="fa fa-facebook"></i></a></li>
+									<li><a href="https://www.youtube.com/c/KemenkumhamRI" target="_blank"><i class="fa fa-youtube"></i></a></li>
+									<li><a href="https://www.instagram.com/kemenkumhamri/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
+	</div>
+	<script src="../assets/front/js/custom.js"></script>
+	<script type="text/javascript" src="../assets/js/sweetalert.min.js"></script>
+	<script type="text/javascript" src="../assets/js/sweetalert.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script src="../assets/js/dataflash.js"></script>
+
+</body>
+
+
+<!-- Mirrored from evdigi.my.id/sitarius/web/register by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Oct 2022 14:12:51 GMT -->
+</html>

@@ -53,9 +53,10 @@ class Objek_wisata extends CI_Controller
 				'objek_wisata_id' => $row->objek_wisata_id,
 				'nama_objek_wisata' => $row->nama_objek_wisata,
 				'alamat' => $row->alamat,
+				'deskripsi' => $row->deskripsi,
 				'jam_buka' => $row->jam_buka,
 				'jam_tutup' => $row->jam_tutup,
-				'telpon' => $row->telpon,
+				'telepon' => $row->telepon,
 				'fasilitas' => $row->fasilitas,
 				'harga_tiket' => $row->harga_tiket,
 				'link_video' => $row->link_video,
@@ -77,9 +78,10 @@ class Objek_wisata extends CI_Controller
 			'objek_wisata_id' => set_value('objek_wisata_id'),
 			'nama_objek_wisata' => set_value('nama_objek_wisata'),
 			'alamat' => set_value('alamat'),
+			'deskripsi' => set_value('deskripsi'),
 			'jam_buka' => set_value('jam_buka'),
 			'jam_tutup' => set_value('jam_tutup'),
-			'telpon' => set_value('telpon'),
+			'telepon' => set_value('telepon'),
 			'fasilitas' => set_value('fasilitas'),
 			'harga_tiket' => set_value('harga_tiket'),
 			'link_video' => set_value('link_video'),
@@ -91,55 +93,77 @@ class Objek_wisata extends CI_Controller
 
 	public function create_action()
 	{
-		$this->_rules();
+		$data = array(
+			'nama_objek_wisata' => $this->input->post('nama_objek_wisata', TRUE),
+			'alamat' => $this->input->post('alamat', TRUE),
+			'deskripsi' => $this->input->post('deskripsi', TRUE),
+			'jam_buka' => $this->input->post('jam_buka', TRUE),
+			'jam_tutup' => $this->input->post('jam_tutup', TRUE),
+			'telepon' => $this->input->post('telepon', TRUE),
+			'fasilitas' => $this->input->post('fasilitas', TRUE),
+			'harga_tiket' => $this->input->post('harga_tiket', TRUE),
+			'link_video' => $this->input->post('link_video', TRUE),
+			'latitude' => $this->input->post('latitude', TRUE),
+			'longitude' => $this->input->post('longitude', TRUE),
+			'haruskahsayabuatdatabaru' => $this->input->post('haruskahsayabuatdatabaru', TRUE) ?? false,
+		);
 
-		if ($this->form_validation->run() == FALSE) {
-			$this->create();
-		} else {
-			$data = array(
-				'nama_objek_wisata' => $this->input->post('nama_objek_wisata', TRUE),
-				'alamat' => $this->input->post('alamat', TRUE),
-				'jam_buka' => $this->input->post('jam_buka', TRUE),
-				'jam_tutup' => $this->input->post('jam_tutup', TRUE),
-				'telpon' => $this->input->post('telpon', TRUE),
-				'fasilitas' => $this->input->post('fasilitas', TRUE),
-				'harga_tiket' => $this->input->post('harga_tiket', TRUE),
-				'link_video' => $this->input->post('link_video', TRUE),
-				'latitude' => $this->input->post('latitude', TRUE),
-				'longitude' => $this->input->post('longitude', TRUE),
-			);
-			$this->Objek_wisata_model->insert($data);
-			$lastId = $this->db->insert_id();
+		$response = array(
+			"status" => "",
+			"message" => ""
+		);
 
-			$jml_photo       = $_POST['jml_photo'];
+		$cekApakahadanamasama = $this->cek_name($data['nama_objek_wisata']);
+
+		if ($cekApakahadanamasama && $data['haruskahsayabuatdatabaru'] == false) {
+			$response['status'] = "error-name-used";
+			$response['message'] = "Nama objek wisata sudah ada";
+			$response['id'] = $cekApakahadanamasama;
+			return $this->output->set_content_type('application/json')->set_output(json_encode($response));
+		}
+
+		$response = array(
+			"status" => "success",
+			"message" => $data
+		);
+
+		$jml_photo       = $_POST['jml_photo'];
+
+		unset($data['haruskahsayabuatdatabaru']); // udah ga kepake lagi, kalo ga dihapus bakal error
+
+		$this->Objek_wisata_model->insert($data);
+		$lastId = $this->db->insert_id();
+
+		$jumlah_photo = count($jml_photo);
+		if($jumlah_photo > 0) {
 			$config['upload_path']          = './assets/img/photo';
 			$config['allowed_types']        = 'jpg|png|jpeg';
 			$config['max_size']             = 10048;
 			$config['encrypt_name']         = true;
 			$this->load->library('upload', $config);
 
-			$jumlah_data = count($jml_photo);
-
-			for ($i = 0; $i < $jumlah_data; $i++) {
-				if (!empty($_FILES['photo']['name'][$i])) {
-					$_FILES['file']['name'] = $_FILES['photo']['name'][$i];
-					$_FILES['file']['type'] = $_FILES['photo']['type'][$i];
-					$_FILES['file']['tmp_name'] = $_FILES['photo']['tmp_name'][$i];
-					$_FILES['file']['error'] = $_FILES['photo']['error'][$i];
-					$_FILES['file']['size'] = $_FILES['photo']['size'][$i];
-
-					if ($this->upload->do_upload('file')) {
-						$uploadData = $this->upload->data();
-						$data2['objek_wisata_id'] = $lastId;
-						$data2['photo'] = $uploadData['file_name'];
-						$this->db->insert('objek_wisata_pic', $data2);
-					}
-				}
+			for ($i = 0; $i < $jumlah_photo; $i++) {
+				// echo $_FILES['photo']['name'][$i];
+				$_FILES['file']['name'] = $_FILES['photo']['name'][$i];
+				$_FILES['file']['type'] = $_FILES['photo']['type'][$i];
+				$_FILES['file']['tmp_name'] = $_FILES['photo']['tmp_name'][$i];
+				$_FILES['file']['error'] = $_FILES['photo']['error'][$i];
+				$_FILES['file']['size'] = $_FILES['photo']['size'][$i];
+				$this->upload->do_upload('file');
+				$uploadData = $this->upload->data();
+				$data2['objek_wisata_id'] = $lastId;
+				$data2['photo'] = $uploadData['file_name'];
+				$this->db->insert('objek_wisata_pic', $data2);
 			}
-
-			$this->session->set_flashdata('message', 'Create Record Success');
-			redirect(site_url('objek_wisata'));
 		}
+
+
+
+		$response = array(
+			"status" => "success",
+			"message" => "Data berhasil disimpan",
+		);
+		return $this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
 
 	public function update($id)
@@ -153,16 +177,17 @@ class Objek_wisata extends CI_Controller
 				'objek_wisata_id' => set_value('objek_wisata_id', $row->objek_wisata_id),
 				'nama_objek_wisata' => set_value('nama_objek_wisata', $row->nama_objek_wisata),
 				'alamat' => set_value('alamat', $row->alamat),
+				'deskripsi' => set_value('deskripsi', $row->deskripsi),
 				'jam_buka' => set_value('jam_buka', $row->jam_buka),
 				'jam_tutup' => set_value('jam_tutup', $row->jam_tutup),
-				'telpon' => set_value('telpon', $row->telpon),
+				'telepon' => set_value('telepon', $row->telepon),
 				'fasilitas' => set_value('fasilitas', $row->fasilitas),
 				'harga_tiket' => set_value('harga_tiket', $row->harga_tiket),
 				'link_video' => set_value('link_video', $row->link_video),
 				'latitude' => set_value('latitude', $row->latitude),
 				'longitude' => set_value('longitude', $row->longitude),
 			);
-			$this->template->load('template', 'objek_wisata/objek_wisata_form', $data);
+			$this->template->load('template', 'objek_wisata/objek_wisata_update', $data);
 		} else {
 			$this->session->set_flashdata('message', 'Record Not Found');
 			redirect(site_url('objek_wisata'));
@@ -182,10 +207,10 @@ class Objek_wisata extends CI_Controller
 			} else {
 				$tidak_terhapus = $this->input->post('id_asal');
 			}
-			$new2 = "('".implode("','",$tidak_terhapus)."')";
+			$new2 = "('" . implode("','", $tidak_terhapus) . "')";
 
 			$objek_wisata_id = $this->input->post('objek_wisata_id');
-			$query= "SELECT * from objek_wisata_pic where objek_wisata_id='$objek_wisata_id' and objek_wisata_pic_id NOT IN $new2";
+			$query = "SELECT * from objek_wisata_pic where objek_wisata_id='$objek_wisata_id' and objek_wisata_pic_id NOT IN $new2";
 			$unlink_db_gambar = $this->db->query($query)->result();
 			foreach ($unlink_db_gambar as $value) {
 				$target_file = './assets/img/photo/' . $value->photo;
@@ -223,9 +248,10 @@ class Objek_wisata extends CI_Controller
 			$data = array(
 				'nama_objek_wisata' => $this->input->post('nama_objek_wisata', TRUE),
 				'alamat' => $this->input->post('alamat', TRUE),
+				'deskripsi' => $this->input->post('deskripsi', TRUE),
 				'jam_buka' => $this->input->post('jam_buka', TRUE),
 				'jam_tutup' => $this->input->post('jam_tutup', TRUE),
-				'telpon' => $this->input->post('telpon', TRUE),
+				'telepon' => $this->input->post('telepon', TRUE),
 				'fasilitas' => $this->input->post('fasilitas', TRUE),
 				'harga_tiket' => $this->input->post('harga_tiket', TRUE),
 				'link_video' => $this->input->post('link_video', TRUE),
@@ -244,16 +270,21 @@ class Objek_wisata extends CI_Controller
 		$row = $this->Objek_wisata_model->get_by_id($id);
 
 		if ($row) {
-			$objek_wisata_id = $row->objek_wisata_id;
-			$pic = $this->db->query("SELECT * from objek_wisata_pic where objek_wisata_id='$objek_wisata_id'")->result();
+			// $objek_wisata_id = $row->objek_wisata_id;
+			// $pic = $this->db->query("SELECT * from objek_wisata_pic where objek_wisata_id='$objek_wisata_id'")->result();
 
-			foreach ($pic as $value) {
-				$target_file = './assets/img/photo/' . $value->photo;
-				unlink($target_file);
-				$this->db->query("DELETE FROM objek_wisata_pic WHERE photo = '$value->photo'");
-			}
+			// foreach ($pic as $value) {
+			// 	$target_file = './assets/img/photo/' . $value->photo;
+			// 	unlink($target_file);
+			// 	$this->db->query("DELETE FROM objek_wisata_pic WHERE photo = '$value->photo'");
+			// }
 
-			$this->Objek_wisata_model->delete($id);
+			// $this->Objek_wisata_model->delete($id);
+			$data = array(
+				'deleted_at' => date('Y-m-d H:i:s'),
+			);
+			$this->Objek_wisata_model->update($id, $data);
+
 			$this->session->set_flashdata('message', 'Delete Record Success');
 			redirect(site_url('objek_wisata'));
 		} else {
@@ -266,9 +297,10 @@ class Objek_wisata extends CI_Controller
 	{
 		$this->form_validation->set_rules('nama_objek_wisata', 'nama objek wisata', 'trim|required');
 		$this->form_validation->set_rules('alamat', 'alamat', 'trim|required');
+		$this->form_validation->set_rules('deskripsi', 'deskripsi', 'trim|required');
 		$this->form_validation->set_rules('jam_buka', 'jam buka', 'trim|required');
 		$this->form_validation->set_rules('jam_tutup', 'jam tutup', 'trim|required');
-		$this->form_validation->set_rules('telpon', 'telpon', 'trim|required');
+		$this->form_validation->set_rules('telepon', 'telepon', 'trim|required');
 		$this->form_validation->set_rules('fasilitas', 'fasilitas', 'trim|required');
 		$this->form_validation->set_rules('harga_tiket', 'harga tiket', 'trim|required');
 		$this->form_validation->set_rules('link_video', 'link video', 'trim|required');
@@ -279,7 +311,8 @@ class Objek_wisata extends CI_Controller
 		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 	}
 
-	public function get_list_location() {
+	public function get_list_location()
+	{
 		// output this data as json
 		$data = array();
 		foreach ($this->Objek_wisata_model->get_all() as $row) {
@@ -287,9 +320,10 @@ class Objek_wisata extends CI_Controller
 				'objek_wisata_id' => $row->objek_wisata_id,
 				'nama_objek_wisata' => $row->nama_objek_wisata,
 				'alamat' => $row->alamat,
+				'deskripsi' => $row->deskripsi,
 				'jam_buka' => $row->jam_buka,
 				'jam_tutup' => $row->jam_tutup,
-				'telpon' => $row->telpon,
+				'telepon' => $row->telepon,
 				'fasilitas' => $row->fasilitas,
 				'harga_tiket' => $row->harga_tiket,
 				'link_video' => $row->link_video,
@@ -300,11 +334,21 @@ class Objek_wisata extends CI_Controller
 		echo json_encode($data);
 	}
 
-	public function location_get() {
+	public function location_get()
+	{
 		// get query params of q
 		$q = $this->input->get('q');
 		$data = $this->Objek_wisata_model->get_by_name($q);
 		echo json_encode($data);
+	}
+
+	public function cek_name()
+	{
+		$nama = $this->input->post('nama_objek_wisata', TRUE);
+		$cek = $this->db->query("SELECT * from objek_wisata where nama_objek_wisata ='$nama'");
+		if ($cek->num_rows() > 0) {
+			return $cek->row()->objek_wisata_id;
+		}
 	}
 }
 

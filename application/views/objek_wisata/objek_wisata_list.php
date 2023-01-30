@@ -1,8 +1,8 @@
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css"/>
- 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" />
+
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
 
 
@@ -15,6 +15,7 @@
 	.dataTables_wrapper .dataTables_paginate .paginate_button {
 		padding: 0;
 	}
+
 	.search-box input#searchField {
 		height: 26px;
 		width: 100%;
@@ -47,13 +48,15 @@
 		box-shadow: 0 0 2px rgba(85, 168, 236, 0.9);
 	}
 
-	.lt-ie9 .search input#searchField { line-height: 26px }
+	.lt-ie9 .search input#searchField {
+		line-height: 26px
+	}
 
-	#table_dynamic_wrapper > div:nth-child(1) {
+	#table_dynamic_wrapper>div:nth-child(1) {
 		display: none;
 	}
 
-	#table_dynamic_wrapper > div:nth-child(2) {
+	#table_dynamic_wrapper>div:nth-child(2) {
 		height: 55rem;
 	}
 </style>
@@ -77,7 +80,7 @@
 
 <div class="page-title">
 	<div class="title_left">
-		<h3>KELOLA DATA OBJEK_WISATA</h3>
+		<h3>KELOLA DATA OBJEK WISATA</h3>
 	</div>
 	<div class="clearfix"></div>
 	<div class="row">
@@ -110,7 +113,7 @@
 						<div class="row">
 							<div class="col-md-5">
 								<div class="search-box">
-									<input type="text" class="div-control" name="search-loc" id="searchField" placeholder="Cari Nama Lokasi, Lat/Long, atau lainnya..." autocomplete="off"/>
+									<input type="text" class="div-control" name="search-loc" id="searchField" placeholder="Cari Nama Lokasi, Lat/Long, atau lainnya..." autocomplete="off" />
 								</div>
 								<div class="indikator-lagi-nyari">
 
@@ -122,9 +125,10 @@
 											<th>Nama Objek Wisata</th>
 											<th hidden>ID</th>
 											<th hidden>Alamat</th>
+											<th hidden>Deskripsi</th>
 											<th hidden>Jam Buka</th>
 											<th hidden>Jam Tutup</th>
-											<th hidden>Telpon</th>
+											<th hidden>Telepon</th>
 											<th hidden>Fasilitas</th>
 											<th hidden>Harga Tiket</th>
 											<th hidden>Latitude</th>
@@ -133,37 +137,38 @@
 										</tr>
 									</thead>
 									<tbody>
-									<?php
-											foreach ($objek_wisata_data as $objek_wisata) {
-											?>
-										<tr>
-											<td hidden><?php echo ++$start ?></td>
-											<td hidden><?php echo $objek_wisata->objek_wisata_id?></td>
-											<td><?php echo $objek_wisata->nama_objek_wisata ?></td>
-											<td hidden><?php echo $objek_wisata->alamat ?></td>
-											<td hidden><?php echo $objek_wisata->jam_buka ?></td>
-											<td hidden><?php echo $objek_wisata->jam_tutup ?></td>
-											<td hidden><?php echo $objek_wisata->telpon ?></td>
-											<td hidden><?php echo $objek_wisata->fasilitas ?></td>
-											<td hidden><?php echo $objek_wisata->harga_tiket ?></td>
-											<td hidden><?php echo $objek_wisata->latitude ?></td>
-											<td hidden><?php echo $objek_wisata->longitude ?></td>
-											<td style="text-align:center">
-											<div class="btn-group" role="group" aria-label="Basic example">
-												<?php
-												echo anchor(site_url('objek_wisata/update/' . $objek_wisata->objek_wisata_id), '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', 'class="btn btn-primary btn-sm"');
-												echo '  ';
-												echo anchor(site_url('objek_wisata/delete/' . $objek_wisata->objek_wisata_id), '<i class="fa fa-trash-o" aria-hidden="true"></i>', 'class="btn btn-danger btn-sm" Delete', 'onclick="javasciprt: return confirm(\'Are You Sure ?\')"');
-												?>
-												<button type="button" data-video_id="<?= $objek_wisata->objek_wisata_id ?>" data-video="<?= $objek_wisata->link_video ?>" class="btn btn-success btn-sm video" data-toggle="modal" data-target="#exampleModal2">
-													<i class="ace-icon fa fa-play"></i>
-												</button>
-											</div>
-											</td>
-										</tr>
-									<?php
-											}
-									?>
+										<?php
+										foreach ($objek_wisata_data as $objek_wisata) {
+										?>
+											<tr>
+												<td hidden><?php echo ++$start ?></td>
+												<td hidden><?php echo $objek_wisata->objek_wisata_id ?></td>
+												<td><?php echo $objek_wisata->nama_objek_wisata ?></td>
+												<td hidden><?php echo $objek_wisata->alamat ?></td>
+												<td hidden><?php echo $objek_wisata->deskripsi ?></td>
+												<td hidden><?php echo $objek_wisata->jam_buka ?></td>
+												<td hidden><?php echo $objek_wisata->jam_tutup ?></td>
+												<td hidden><?php echo $objek_wisata->telepon ?></td>
+												<td hidden><?php echo $objek_wisata->fasilitas ?></td>
+												<td hidden><?php echo $objek_wisata->harga_tiket ?></td>
+												<td hidden><?php echo $objek_wisata->latitude ?></td>
+												<td hidden><?php echo $objek_wisata->longitude ?></td>
+												<td style="text-align:center">
+													<div class="btn-group" role="group" aria-label="Basic example">
+														<?php
+														echo anchor(site_url('objek_wisata/update/' . $objek_wisata->objek_wisata_id), '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', 'class="btn btn-primary btn-sm"');
+														echo '  ';
+														echo anchor(site_url('objek_wisata/delete/' . $objek_wisata->objek_wisata_id), '<i class="fa fa-trash-o" aria-hidden="true"></i>', 'onclick="javasciprt: return confirm(\'Apakah Data Akan DIhapus ?\')" class="btn btn-danger btn-sm"');
+														?>
+														<button type="button" data-video_id="<?= $objek_wisata->objek_wisata_id ?>" data-video="<?= $objek_wisata->link_video ?>" class="btn btn-success btn-sm video" data-toggle="modal" data-target="#exampleModal2">
+															<i class="ace-icon fa fa-play"></i>
+														</button>
+													</div>
+												</td>
+											</tr>
+										<?php
+										}
+										?>
 									</tbody>
 								</table>
 							</div>
@@ -205,7 +210,7 @@
 
 <script>
 	$(document).ready(function() {
-		
+
 		var table = $('#table_dynamic').DataTable({
 			"lengthChange": false
 		});
@@ -217,26 +222,30 @@
 
 		// initialize OSM
 		const osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-		const osmAttrib='Map Objek Wisata © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
-		const osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 50, attribution: osmAttrib});		
+		const osmAttrib = 'Map Objek Wisata © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
+		const osm = new L.TileLayer(osmUrl, {
+			minZoom: 8,
+			maxZoom: 50,
+			attribution: osmAttrib
+		});
 
 		getLocationMap.scrollWheelZoom.disable()
 		getLocationMap.setView(new L.LatLng('-6.8384545', '108.431134'), 10)
 		getLocationMap.addLayer(osm)
-		const getLocationMapMarker = L.marker([0, 0]).addTo(getLocationMap);								
-		
+		const getLocationMapMarker = L.marker([0, 0]).addTo(getLocationMap);
+
 		function refreshMarkers(data) {
 			let list_of_location = data
 
-				
-			getLocationMap.eachLayer(function (layer) {
+
+			getLocationMap.eachLayer(function(layer) {
 				if (layer.options.attribution !== osmAttrib) {
 					getLocationMap.removeLayer(layer);
 				}
 			})
-			
+
 			let list_of_location_html = ''
-			for(let i = 0; i < list_of_location.length; i++){
+			for (let i = 0; i < list_of_location.length; i++) {
 
 				list_of_location_html += `<li class="list-group-item" data-lat="${list_of_location[i].latitude}" data-lng="${list_of_location[i].longitude}">${list_of_location[i].nama_objek_wisata}</li>`
 				let marker = L.marker([list_of_location[i].latitude, list_of_location[i].longitude]).addTo(getLocationMap);
@@ -251,11 +260,13 @@
 		$("#searchField").on("keyup change", function() {
 			var input = $(this);
 			table.search(input.val()).draw();
-			
-			var array = table.rows({ search: 'applied' }).data();
+
+			var array = table.rows({
+				search: 'applied'
+			}).data();
 			dataarray = []
 
-			for(let i = 0; i < array.length; i++){
+			for (let i = 0; i < array.length; i++) {
 				dataarray.push({
 					objek_wisata_id: array[i][1],
 					latitude: array[i][9],
@@ -264,7 +275,7 @@
 					alamat: array[i][3],
 				})
 			}
-			if(input.val() != ''){
+			if (input.val() != '') {
 				$('.indikator-lagi-nyari').html('<b>Pencarian untuk : </b><i>' + input.val() + '</i> (' + dataarray.length + ' data ditemukan)')
 				refreshMarkers(dataarray)
 			} else {
@@ -272,12 +283,12 @@
 			}
 		});
 
-		function GetListofLocation(){
+		function GetListofLocation() {
 			$.ajax({
 				url: '<?= base_url('objek_wisata/get_list_location') ?>',
 				type: 'GET',
 				dataType: 'json',
-				success: function(data){
+				success: function(data) {
 					console.log(data)
 					refreshMarkers(data)
 				}
@@ -288,10 +299,10 @@
 
 		function getToLoc(lat, lng, displayname = null) {
 			const zoom = 17;
-			
+
 			getLocationMap.setView(new L.LatLng(lat, lng), zoom);
 			getLocationMapMarker.setLatLng([lat, lng])
-		
+
 		}
 	});
 </script>

@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>SPK AHP </title>
+    <title>Admin</title>
 
     <!-- Bootstrap -->
     <link href="<?= base_url() ?>assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -33,7 +33,7 @@
           <section class="login_content">
             <form action="<?=site_url('auth/process')?>" method="post">
                 <!-- <img style="width: 90%;height: auto;margin-top: 20px;" src="<?php echo base_url(); ?>assets/img/logo.png"> -->
-                <h1>Login Form</h1>
+                <h1>Form Login Admin</h1>
               <div>
                 <input type="text" class="form-control" placeholder="Username" name="username" required="" />
               </div>
@@ -41,14 +41,15 @@
                 <input type="password" name="password" class="form-control" placeholder="Password" required="" />
               </div>
               <div>
-                <button type="submit" class="btn btn-success" name="login" style="float: left;">Login</button>
+                <button type="submit" class="btn btn-success" name="login" style="float: center;">Login</button>
               </div>
               <div class="clearfix"></div>
 
               <div class="separator">
 
                 <div>
-                  <p>©<?= date('Y') ?> - Application Geographic Information System</p>
+                  <p>Aplikasi Sistem Informasi Geografis Objek Wisata Kecamatan Pasawahan</p>
+                  <p>©<?= date('Y') ?></p>
                 </div>
               </div>
             </form>
